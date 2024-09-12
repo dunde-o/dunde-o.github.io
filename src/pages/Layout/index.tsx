@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ReactNode } from "react";
 import LayoutHeader from "@src/pages/Layout/Header.tsx";
+import Aside from "@src/pages/Layout/Aside.tsx";
 
 const StyledLayout = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ const Layout = (props: LayoutProps) => {
   return (
     <StyledLayout>
       <LayoutHeader/>
-      <aside>aside</aside>
+      <Aside/>
       <main>{children}</main>
       <footer>footer</footer>
     </StyledLayout>
