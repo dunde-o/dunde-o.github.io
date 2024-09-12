@@ -1,14 +1,17 @@
 import styled from "styled-components";
 import { ReactNode } from "react";
+import LayoutHeader from "@src/pages/Layout/Header.tsx";
 
 const StyledLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
-  width: 100%;
+
+  width: 100vw;
   height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
 `
 
 type LayoutProps = {
@@ -20,10 +23,7 @@ const Layout = (props: LayoutProps) => {
 
   return (
     <StyledLayout>
-      <header>
-        header
-        <nav>nav</nav>
-      </header>
+      <LayoutHeader/>
       <aside>aside</aside>
       <main>{children}</main>
       <footer>footer</footer>
