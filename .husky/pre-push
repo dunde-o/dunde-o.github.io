@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Get the current branch name
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Get the remote and branch being pushed to
+while read local_ref local_sha remote_ref remote_sha
+do
+  remote_branch=$(echo "$remote_ref" | sed 's|refs/heads/||')
+
+  # Only run deploy when pushing to main branch
+  if [ "$remote_branch" = "main" ]; then
+    echo "Pushing to main branch, running deploy..."
+    yarn deploy
+  fi
+done
