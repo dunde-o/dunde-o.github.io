@@ -1,73 +1,59 @@
-# Welcome to your Lovable project
+# Dunde's Portfolio
 
-## Project info
+프론트엔드 개발과 생성형 AI를 결합하여 새로운 가치를 창출하는 개발자 Dunde의 포트폴리오입니다.
 
-**URL**: https://lovable.dev/projects/8e3b47a6-003f-486f-9a23-5712f1fb386b
+**URL**: https://www.dunde.kr/
 
-## How can I edit this code?
+## Tech Stack
 
-There are several ways of editing your application.
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui (Radix UI)
+- React Router
+- TanStack Query
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/8e3b47a6-003f-486f-9a23-5712f1fb386b) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Getting Started
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+yarn install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Start development server (localhost:8080)
+yarn dev
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Build for production
+yarn build
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Preview production build
+yarn preview
 ```
 
-**Edit a file directly in GitHub**
+## Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+main 브랜치에 push하면 husky pre-push 훅을 통해 자동으로 GitHub Pages에 배포됩니다.
 
-**Use GitHub Codespaces**
+```sh
+# Manual deploy
+yarn deploy
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/8e3b47a6-003f-486f-9a23-5712f1fb386b) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```
+src/
+├── components/     # 컴포넌트
+│   ├── ui/        # shadcn/ui 컴포넌트
+│   ├── Navbar.tsx
+│   ├── NavLink.tsx
+│   └── ProjectCard.tsx
+├── hooks/         # 커스텀 훅
+├── lib/           # 유틸리티
+├── pages/         # 페이지 컴포넌트
+│   ├── Index.tsx  # 프로젝트 목록 (/)
+│   ├── About.tsx  # 소개 (/about)
+│   └── NotFound.tsx
+├── App.tsx        # 라우팅 설정
+└── main.tsx       # 엔트리 포인트
+```
