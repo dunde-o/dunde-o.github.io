@@ -44,9 +44,9 @@ const Index = () => {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-to))] bg-clip-text text-transparent">
             Featured Projects
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Explore a collection of innovative solutions and creative implementations. 
-            Each project showcases unique challenges and cutting-edge technologies.
+          <p className="text-xl text-muted-foreground max-w-2xl break-keep">
+            개인 연구 및 학습용 예제부터 실무 감각을 익힌 팀 프로젝트와 배포 결과물까지,
+            다채로운 경험으로 구성된 프로젝트 아카이브입니다.
           </p>
         </div>
         

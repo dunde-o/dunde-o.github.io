@@ -6,6 +6,13 @@
 All colors MUST be HSL.
 */
 
+@font-face {
+    font-family: 'Ridibatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 220 25% 6%;
@@ -65,5 +72,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'GyeonggiMillenniumTitle', sans-serif;
   }
 }

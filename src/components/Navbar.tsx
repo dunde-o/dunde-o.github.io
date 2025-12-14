@@ -9,7 +9,7 @@ const Navbar = () => {
             to="/" 
             className="text-xl font-bold bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-to))] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
-            Portfolio
+            Dunde's Portfolio
           </NavLink>
           
           <div className="flex items-center gap-8">
