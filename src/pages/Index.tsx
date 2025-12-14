@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
 
@@ -35,6 +36,10 @@ const projects = [
 ];
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "Dunde's Portfolio | Projects";
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

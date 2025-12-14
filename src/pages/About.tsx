@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 
 const About = () => {
+  useEffect(() => {
+    document.title = "Dunde's Portfolio | About";
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
