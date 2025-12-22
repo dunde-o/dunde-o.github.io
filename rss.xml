@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dunde&apos;s Blog</title>
+    <link>https://www.dunde.kr</link>
+    <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Mon, 22 Dec 2025 16:31:30 GMT</lastBuildDate>
+    <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>제목 테스트</title>
+      <link>https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</guid>
+      <pubDate>Mon, 22 Dec 2025 00:00:00 GMT</pubDate>
+      <description>React와 AI를 결합한 개발 경험 프론트엔드 개발에 생성형 AI를 활용하면서 느낀 점과 생산성 향상 팁을 공유합니다. 들어가며 최근 AI 도구들이 개발 워크플로우에 깊숙이 들어오면서 개발 방식이 크게 변화하고 있습니다. 특히 코드 작성, 디버깅, 리팩토링 과정에서 AI의 도움을 받으면 생산성이 눈에 띄게 향상됩니다. AI 활용 사례 1. 코드 자동 완성 2. 버그 디버깅 복잡한 에러 메시지를 AI에게 전달하면 원인과 해결책을 빠르게 파악할 수 있습니다. 3. 리팩토링 제안 기존 코드를 더 깔끔하고 효율적으로 개선하는 방법을 제안</description>
+      <category>test category</category>
+      <category>test tag 1</category>
+      <category>test tag 2</category>
+    </item>
+  </channel>
+</rss>
