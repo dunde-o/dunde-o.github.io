@@ -5,40 +5,55 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev      # Start dev server on localhost:8080
-npm run build    # Production build to dist/
-npm run lint     # Run ESLint
-npm run preview  # Preview production build
+yarn dev             # Start dev server on localhost:8080
+yarn build           # Production build to dist/
+yarn lint            # Run ESLint
+yarn preview         # Preview production build
+yarn deploy          # Deploy to GitHub Pages (runs predeploy automatically)
+
+# Notion & SEO
+yarn fetch:notion    # Fetch blog posts from Notion API → src/data/posts.json
+yarn generate:seo    # Generate RSS feed and sitemap → public/
 ```
 
 ## Architecture
 
-This is a React + TypeScript portfolio site built with Vite and styled using Tailwind CSS with shadcn/ui components.
+React + TypeScript portfolio site with Notion-powered blog, deployed to GitHub Pages.
 
-**Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui (Radix UI), React Router, TanStack Query
+**Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Router, TanStack Query, Notion API
 
 **Key Directories:**
-- `src/pages/` - Route components (Index, About, NotFound)
-- `src/components/` - Custom components (Navbar, ProjectCard, NavLink)
+- `src/pages/` - Route components (Index, About, Blog, BlogPost, NotFound)
+- `src/components/` - Custom components (Navbar, ProjectCard, BlogPostCard, NavLink)
 - `src/components/ui/` - shadcn/ui components
-- `src/hooks/` - Custom hooks (use-mobile, use-toast)
-- `src/lib/utils.ts` - Utility functions (cn helper)
+- `src/data/` - Static JSON data (projects.json, posts.json)
+- `src/types/` - TypeScript type definitions
+- `src/lib/` - Utilities (notion.ts for blog data access)
+- `scripts/` - Build-time scripts (fetch-notion.js, generate-rss.js, generate-sitemap.js)
 
-**Routing:** Configured in `src/App.tsx` using React Router. Routes: `/`, `/about`, `*` (404)
+**Routing:** Configured in `src/App.tsx`. Routes: `/`, `/about`, `/blog`, `/blog/:slug`, `*` (404)
 
-**Path Alias:** `@/` maps to `src/` (configured in vite.config.ts and tsconfig)
+**Path Alias:** `@/` maps to `src/`
+
+## Blog System
+
+Blog posts are fetched from Notion at build time (not runtime) due to GitHub Pages limitations.
+
+**Flow:**
+1. `fetch:notion` - Fetches pages from Notion database, converts blocks to markdown, saves to `src/data/posts.json`
+2. `generate:seo` - Generates `public/rss.xml` and `public/sitemap.xml` from posts.json
+3. React app imports posts.json directly
+
+**Environment:** Requires `.env` with `VITE_NOTION_API_KEY` and `VITE_NOTION_DATABASE_ID`
 
 ## Styling
 
-- Dark theme by default (defined in `src/index.css` using CSS variables)
-- All colors use HSL format via CSS custom properties
-- Custom animations: `fade-in`, `slide-up`, `scale-in` (defined in tailwind.config.ts)
-- shadcn/ui uses `components.json` for configuration
+- Dark theme by default (CSS variables in `src/index.css`)
+- Colors use HSL format
+- Custom animations: `fade-in`, `slide-up`, `scale-in` (tailwind.config.ts)
 
 ## Adding shadcn/ui Components
 
 ```bash
 npx shadcn@latest add <component-name>
 ```
-
-Components install to `src/components/ui/`.

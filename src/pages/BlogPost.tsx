@@ -2,10 +2,17 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
+import ImageWithLoader from "@/components/ImageWithLoader";
+import CodeBlock from "@/components/CodeBlock";
+import TableOfContents from "@/components/TableOfContents";
 import { getBlogPostBySlug } from "@/lib/notion";
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+const generateId = (text: string) =>
+  String(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9가-힣\s]/g, "")
+    .replace(/\s+/g, "-");
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -75,10 +82,11 @@ const BlogPost = () => {
 
           {post.coverImage && (
             <div className="mb-8 rounded-xl overflow-hidden">
-              <img
+              <ImageWithLoader
                 src={post.coverImage}
                 alt={post.title}
                 className="w-full h-64 md:h-96 object-cover"
+                containerClassName="h-64 md:h-96"
               />
             </div>
           )}
@@ -103,7 +111,7 @@ const BlogPost = () => {
             {post.title}
           </h1>
 
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-12">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <time>
               {new Date(post.createdAt).toLocaleDateString("ko-KR", {
                 year: "numeric",
@@ -124,6 +132,8 @@ const BlogPost = () => {
             )}
           </div>
 
+          <hr className="border-border my-10" />
+
           <div className="prose prose-invert prose-lg max-w-none">
             <ReactMarkdown
               components={{
@@ -138,28 +148,32 @@ const BlogPost = () => {
                       {children}
                     </code>
                   ) : (
-                    <SyntaxHighlighter
-                      style={vscDarkPlus}
-                      language={match[1]}
-                      PreTag="div"
-                      className="rounded-lg !my-6"
-                    >
+                    <CodeBlock language={match[1]}>
                       {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
+                    </CodeBlock>
                   );
                 },
                 h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold mt-12 mb-4 text-foreground">
+                  <h1
+                    id={generateId(String(children))}
+                    className="text-3xl font-bold mt-12 mb-4 text-foreground"
+                  >
                     {children}
                   </h1>
                 ),
                 h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold mt-10 mb-4 text-foreground">
+                  <h2
+                    id={generateId(String(children))}
+                    className="text-2xl font-bold mt-10 mb-4 text-foreground"
+                  >
                     {children}
                   </h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-xl font-semibold mt-8 mb-3 text-foreground">
+                  <h3
+                    id={generateId(String(children))}
+                    className="text-xl font-semibold mt-8 mb-3 text-foreground"
+                  >
                     {children}
                   </h3>
                 ),
@@ -195,11 +209,13 @@ const BlogPost = () => {
                 ),
                 hr: () => <hr className="border-border my-8" />,
                 img: ({ src, alt }) => (
-                  <img
-                    src={src}
-                    alt={alt}
-                    className="rounded-lg my-6 max-w-full"
-                  />
+                  <div className="flex justify-center my-6">
+                    <ImageWithLoader
+                      src={src || ""}
+                      alt={alt || ""}
+                      className="rounded-lg max-w-full"
+                    />
+                  </div>
                 ),
               }}
             >
@@ -208,6 +224,8 @@ const BlogPost = () => {
           </div>
         </article>
       </main>
+
+      <TableOfContents content={post.content} />
     </div>
   );
 };
