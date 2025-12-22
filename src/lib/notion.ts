@@ -1,15 +1,6 @@
-// 블로그 포스트 타입 정의
-export interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  createdAt: string;
-  updatedAt: string;
-  category: string;
-  tags: string[];
-  coverImage?: string | null;
-  content: string;
-}
+import type { BlogPost } from "@/types";
+
+export type { BlogPost };
 
 // 빌드 시 생성된 JSON 파일에서 포스트 데이터 가져오기
 export async function getBlogPosts(): Promise<BlogPost[]> {

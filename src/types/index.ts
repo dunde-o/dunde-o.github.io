@@ -1,0 +1,18 @@
+export interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  link?: string;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  category: string;
+  tags: string[];
+  coverImage?: string | null;
+  content: string;
+}
