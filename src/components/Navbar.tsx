@@ -23,6 +23,15 @@ const Navbar = () => {
             </NavLink>
             
             <NavLink
+              to="/blog"
+              className="text-muted-foreground hover:text-foreground transition-colors relative group"
+              activeClassName="text-primary"
+            >
+              Blog
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+            </NavLink>
+
+            <NavLink
               to="/about"
               className="text-muted-foreground hover:text-foreground transition-colors relative group"
               activeClassName="text-primary"
