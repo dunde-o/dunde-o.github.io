@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import BlogPostCard from "@/components/BlogPostCard";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import posts from "@/data/posts.json";
 import type { BlogPost } from "@/types";
 import { searchPosts } from "@/lib/searchParser";
@@ -78,6 +79,16 @@ const Blog = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
+
+      {/* 좌측 세로 광고 */}
+      <div className="hidden min-[1400px]:block fixed left-8 top-1/2 -translate-y-1/2">
+        <AdPlaceholder type="vertical" />
+      </div>
+
+      {/* 우측 세로 광고 */}
+      <div className="hidden min-[1400px]:block fixed right-8 top-1/2 -translate-y-1/2">
+        <AdPlaceholder type="vertical" />
+      </div>
 
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
         <div className="animate-fade-in">
@@ -161,6 +172,9 @@ const Blog = () => {
             )}
           </div>
 
+          {/* 가로 광고 */}
+          <AdPlaceholder type="horizontal" />
+
           {filteredPosts.length === 0 ? (
             <div className="text-center text-muted-foreground py-12">
               {searchQuery ? "검색 결과가 없습니다." : "아직 작성된 글이 없습니다."}
@@ -231,6 +245,11 @@ const Blog = () => {
                   </button>
                 </div>
               )}
+
+              {/* 하단 가로 광고 */}
+              <div className="mt-12">
+                <AdPlaceholder type="horizontal" />
+              </div>
             </>
           )}
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import CodeBlock from "@/components/CodeBlock";
 import TableOfContents from "@/components/TableOfContents";
@@ -91,6 +92,16 @@ const BlogPost = () => {
     <div className="min-h-screen">
       <Navbar />
 
+      {/* 좌측 세로 광고 - 1900px 이상에서 목차 대칭 위치 */}
+      <div className="hidden min-[1900px]:block fixed left-[calc(32px+256px+24px)] top-1/2 -translate-y-1/2">
+        <AdPlaceholder type="vertical" />
+      </div>
+
+      {/* 우측 세로 광고 - 1900px 이상에서 목차와 글 사이 */}
+      <div className="hidden min-[1900px]:block fixed right-[calc(32px+256px+24px)] top-1/2 -translate-y-1/2">
+        <AdPlaceholder type="vertical" />
+      </div>
+
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
         <article className="animate-fade-in">
           <button
@@ -164,125 +175,137 @@ const BlogPost = () => {
 
           <hr className="border-border my-10" />
 
+          {/* 헤더와 콘텐츠 사이 가로 광고 */}
+          <AdPlaceholder type="horizontal" />
+
           <div className="prose prose-invert prose-lg max-w-none break-keep">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                code({ className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || "");
-                  const isInline = !match;
-                  return isInline ? (
-                    <code
-                      className="bg-muted px-1.5 py-0.5 rounded text-sm"
-                      {...props}
-                    >
-                      {children}
-                    </code>
-                  ) : (
-                    <CodeBlock language={match[1]}>
-                      {String(children).replace(/\n$/, "")}
-                    </CodeBlock>
-                  );
-                },
-                h1: ({ children }) => (
-                  <h1
-                    id={generateId(String(children))}
-                    className="text-3xl font-bold mt-12 mb-4 text-foreground"
-                  >
-                    {children}
-                  </h1>
-                ),
-                h2: ({ children }) => (
-                  <h2
-                    id={generateId(String(children))}
-                    className="text-2xl font-bold mt-10 mb-4 text-foreground"
-                  >
-                    {children}
-                  </h2>
-                ),
-                h3: ({ children }) => (
-                  <h3
-                    id={generateId(String(children))}
-                    className="text-xl font-semibold mt-8 mb-3 text-foreground"
-                  >
-                    {children}
-                  </h3>
-                ),
-                p: ({ children }) => (
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    {children}
-                  </p>
-                ),
-                ul: ({ children }) => (
-                  <ul className="list-disc text-muted-foreground mb-4 pl-6 [&_ul]:mt-0 [&_ul]:mb-0">
-                    {children}
-                  </ul>
-                ),
-                ol: ({ children }) => (
-                  <ol className="list-decimal text-muted-foreground mb-4 pl-6 [&_ol]:mt-0 [&_ol]:mb-0">
-                    {children}
-                  </ol>
-                ),
-                li: ({ children }) => (
-                  <li className="my-1 [&>p]:mb-1">{children}</li>
-                ),
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-6">
-                    {children}
-                  </blockquote>
-                ),
-                a: ({ href, children }) => (
-                  <a
-                    href={href}
-                    className="text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {children}
-                  </a>
-                ),
-                hr: () => <hr className="border-border my-8" />,
-                table: ({ children }) => (
-                  <div className="overflow-x-auto my-6">
-                    <table className="min-w-full border-collapse border border-border">
-                      {children}
-                    </table>
+            {post.content.split(/🅰️/g).map((section, index, array) => (
+              <div key={index}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                  components={{
+                    code({ className, children, ...props }) {
+                      const match = /language-(\w+)/.exec(className || "");
+                      const isInline = !match;
+                      return isInline ? (
+                        <code
+                          className="bg-muted px-1.5 py-0.5 rounded text-sm"
+                          {...props}
+                        >
+                          {children}
+                        </code>
+                      ) : (
+                        <CodeBlock language={match[1]}>
+                          {String(children).replace(/\n$/, "")}
+                        </CodeBlock>
+                      );
+                    },
+                    h1: ({ children }) => (
+                      <h1
+                        id={generateId(String(children))}
+                        className="text-3xl font-bold mt-12 mb-4 text-foreground"
+                      >
+                        {children}
+                      </h1>
+                    ),
+                    h2: ({ children }) => (
+                      <h2
+                        id={generateId(String(children))}
+                        className="text-2xl font-bold mt-10 mb-4 text-foreground"
+                      >
+                        {children}
+                      </h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3
+                        id={generateId(String(children))}
+                        className="text-xl font-semibold mt-8 mb-3 text-foreground"
+                      >
+                        {children}
+                      </h3>
+                    ),
+                    p: ({ children }) => (
+                      <p className="text-muted-foreground leading-relaxed mb-4">
+                        {children}
+                      </p>
+                    ),
+                    ul: ({ children }) => (
+                      <ul className="list-disc text-muted-foreground mb-4 pl-6 [&_ul]:mt-0 [&_ul]:mb-0">
+                        {children}
+                      </ul>
+                    ),
+                    ol: ({ children }) => (
+                      <ol className="list-decimal text-muted-foreground mb-4 pl-6 [&_ol]:mt-0 [&_ol]:mb-0">
+                        {children}
+                      </ol>
+                    ),
+                    li: ({ children }) => (
+                      <li className="my-1 [&>p]:mb-1">{children}</li>
+                    ),
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-6">
+                        {children}
+                      </blockquote>
+                    ),
+                    a: ({ href, children }) => (
+                      <a
+                        href={href}
+                        className="text-primary hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {children}
+                      </a>
+                    ),
+                    hr: () => <hr className="border-border my-8" />,
+                    table: ({ children }) => (
+                      <div className="overflow-x-auto my-6">
+                        <table className="min-w-full border-collapse border border-border">
+                          {children}
+                        </table>
+                      </div>
+                    ),
+                    thead: ({ children }) => (
+                      <thead className="bg-primary/40 border-b-2 border-primary/50 [&_tr]:hover:bg-transparent">
+                        {children}
+                      </thead>
+                    ),
+                    th: ({ children }) => (
+                      <th className="border border-border px-4 py-2 text-left font-semibold text-foreground">
+                        {children}
+                      </th>
+                    ),
+                    tr: ({ children }) => (
+                      <tr className="group/row hover:bg-white/30 transition-colors">
+                        {children}
+                      </tr>
+                    ),
+                    td: ({ children }) => (
+                      <td className="border border-border px-4 py-2 text-muted-foreground group-hover/row:text-white">
+                        {children}
+                      </td>
+                    ),
+                    img: ({ src, alt }) => (
+                      <div className="flex justify-center my-6">
+                        <ImageWithLoader
+                          src={src || ""}
+                          alt={alt || ""}
+                          className="rounded-lg max-w-full"
+                        />
+                      </div>
+                    ),
+                  }}
+                >
+                  {section}
+                </ReactMarkdown>
+                {index < array.length - 1 && (
+                  <div className="my-8">
+                    <AdPlaceholder type="horizontal" />
                   </div>
-                ),
-                thead: ({ children }) => (
-                  <thead className="bg-primary/40 border-b-2 border-primary/50 [&_tr]:hover:bg-transparent">
-                    {children}
-                  </thead>
-                ),
-                th: ({ children }) => (
-                  <th className="border border-border px-4 py-2 text-left font-semibold text-foreground">
-                    {children}
-                  </th>
-                ),
-                tr: ({ children }) => (
-                  <tr className="group/row hover:bg-white/30 transition-colors">
-                    {children}
-                  </tr>
-                ),
-                td: ({ children }) => (
-                  <td className="border border-border px-4 py-2 text-muted-foreground group-hover/row:text-white">
-                    {children}
-                  </td>
-                ),
-                img: ({ src, alt }) => (
-                  <div className="flex justify-center my-6">
-                    <ImageWithLoader
-                      src={src || ""}
-                      alt={alt || ""}
-                      className="rounded-lg max-w-full"
-                    />
-                  </div>
-                ),
-              }}
-            >
-              {post.content}
-            </ReactMarkdown>
+                )}
+              </div>
+            ))}
           </div>
 
           {/* 전체 글 순서 네비게이션 */}
@@ -350,8 +373,18 @@ const BlogPost = () => {
             </div>
           </div>
 
+          {/* 네비게이션과 댓글 사이 가로 광고 */}
+          <div className="mt-12">
+            <AdPlaceholder type="horizontal" />
+          </div>
+
           {/* 댓글 */}
           <Giscus slug={post.slug} />
+
+          {/* 댓글 하단 가로 광고 */}
+          <div className="mt-12">
+            <AdPlaceholder type="horizontal" />
+          </div>
         </article>
       </main>
 
