@@ -9,7 +9,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
       
       <main className="max-w-7xl mx-auto px-6 pt-32 pb-20">

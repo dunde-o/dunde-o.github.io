@@ -31,7 +31,7 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         <Navbar />
         <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
           <div className="text-center">
@@ -51,7 +51,7 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
 
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
