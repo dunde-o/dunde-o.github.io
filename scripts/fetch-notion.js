@@ -287,6 +287,8 @@ async function fetchBlogPosts() {
             properties.series?.rich_text?.[0]?.plain_text ||
             null,
           coverImage,
+          description:
+            properties.description?.rich_text?.[0]?.plain_text || null,
           content,
         };
       })

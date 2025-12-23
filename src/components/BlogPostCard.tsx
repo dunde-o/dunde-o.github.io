@@ -49,8 +49,12 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
             </h2>
 
             <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
-              {post.content.slice(0, 150).replace(/[#*`>\-]/g, "").trim()}
-              {post.content.length > 150 && "..."}
+              {post.description || (
+                <>
+                  {post.content.slice(0, 150).replace(/[#*`>\-]/g, "").trim()}
+                  {post.content.length > 150 && "..."}
+                </>
+              )}
             </p>
 
             <time className="text-xs text-muted-foreground">

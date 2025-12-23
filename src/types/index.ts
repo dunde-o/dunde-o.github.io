@@ -15,5 +15,6 @@ export interface BlogPost {
   tags: string[];
   series?: string | null;
   coverImage?: string | null;
+  description?: string | null;
   content: string;
 }
