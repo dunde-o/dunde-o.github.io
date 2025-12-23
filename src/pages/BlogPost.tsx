@@ -137,6 +137,8 @@ const BlogPost = () => {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
               })}
             </time>
             {post.updatedAt !== post.createdAt && (
@@ -146,6 +148,8 @@ const BlogPost = () => {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
                 )
               </span>

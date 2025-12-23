@@ -202,11 +202,11 @@ async function fetchBlogPosts() {
 
         const title = titleProp?.title?.[0]?.plain_text || "Untitled";
 
-        // 현재 페이지의 updatedAt 계산
+        // 현재 페이지의 updatedAt 계산 (시분초 포함)
         const currentUpdatedAt =
           properties.updateAt?.date?.start ||
-          page.last_edited_time?.split("T")[0] ||
-          new Date().toISOString().split("T")[0];
+          page.last_edited_time ||
+          new Date().toISOString();
 
         // 기존 포스트와 비교
         const existingPost = existingPostsMap.get(page.id);
@@ -255,8 +255,8 @@ async function fetchBlogPosts() {
             page.id.replace(/-/g, ""),
           createdAt:
             properties.createAt?.date?.start ||
-            page.created_time?.split("T")[0] ||
-            new Date().toISOString().split("T")[0],
+            page.created_time ||
+            new Date().toISOString(),
           updatedAt: currentUpdatedAt,
           category:
             properties.category?.select?.name || "",
