@@ -7,6 +7,8 @@ import CodeBlock from "@/components/CodeBlock";
 import TableOfContents from "@/components/TableOfContents";
 import { getBlogPostBySlug } from "@/lib/notion";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 const generateId = (text: string) =>
   String(text)
@@ -134,8 +136,10 @@ const BlogPost = () => {
 
           <hr className="border-border my-10" />
 
-          <div className="prose prose-invert prose-lg max-w-none">
+          <div className="prose prose-invert prose-lg max-w-none break-keep">
             <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
               components={{
                 code({ className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
@@ -208,6 +212,33 @@ const BlogPost = () => {
                   </a>
                 ),
                 hr: () => <hr className="border-border my-8" />,
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-6">
+                    <table className="min-w-full border-collapse border border-border">
+                      {children}
+                    </table>
+                  </div>
+                ),
+                thead: ({ children }) => (
+                  <thead className="bg-primary/40 border-b-2 border-primary/50 [&_tr]:hover:bg-transparent">
+                    {children}
+                  </thead>
+                ),
+                th: ({ children }) => (
+                  <th className="border border-border px-4 py-2 text-left font-semibold text-foreground">
+                    {children}
+                  </th>
+                ),
+                tr: ({ children }) => (
+                  <tr className="group/row hover:bg-white/30 transition-colors">
+                    {children}
+                  </tr>
+                ),
+                td: ({ children }) => (
+                  <td className="border border-border px-4 py-2 text-muted-foreground group-hover/row:text-white">
+                    {children}
+                  </td>
+                ),
                 img: ({ src, alt }) => (
                   <div className="flex justify-center my-6">
                     <ImageWithLoader

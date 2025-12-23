@@ -24,7 +24,7 @@ const ProjectCard = ({ title, description, tags, link }: ProjectCardProps) => {
           )}
         </div>
         
-        <p className="text-muted-foreground mb-6 leading-relaxed">
+        <p className="text-muted-foreground mb-6 leading-relaxed break-keep">
           {description}
         </p>
         
