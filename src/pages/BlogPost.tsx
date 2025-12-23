@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import CodeBlock from "@/components/CodeBlock";
 import TableOfContents from "@/components/TableOfContents";
+import Giscus from "@/components/Giscus";
 import posts from "@/data/posts.json";
 import type { BlogPost as BlogPostType } from "@/types";
 import ReactMarkdown from "react-markdown";
@@ -348,6 +349,9 @@ const BlogPost = () => {
               </Link>
             </div>
           </div>
+
+          {/* 댓글 */}
+          <Giscus slug={post.slug} />
         </article>
       </main>
 
