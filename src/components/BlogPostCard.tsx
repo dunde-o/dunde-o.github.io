@@ -8,7 +8,7 @@ interface BlogPostCardProps {
 const BlogPostCard = ({ post }: BlogPostCardProps) => {
   return (
     <NavLink to={`/blog/${post.slug}`} className="block group">
-      <article className="p-6 rounded-xl border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+      <article className="p-6 rounded-xl border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:scale-[1.02] hover:-translate-y-1">
         <div className="flex gap-6">
           {/* 컨텐츠 영역 */}
           <div className="flex-1 min-w-0">
