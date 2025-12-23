@@ -5,11 +5,14 @@ import BlogPostCard from "@/components/BlogPostCard";
 import posts from "@/data/posts.json";
 import type { BlogPost } from "@/types";
 import { searchPosts } from "@/lib/searchParser";
-import { Search, X, HelpCircle } from "lucide-react";
+import { Search, X, HelpCircle, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+
+const POSTS_PER_PAGE = 6;
 
 const Blog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
+  const currentPage = Math.max(1, parseInt(searchParams.get("p") || "1", 10));
   const [inputValue, setInputValue] = useState(searchQuery);
 
   useEffect(() => {
@@ -22,7 +25,43 @@ const Blog = () => {
     return searchPosts(typedPosts, searchQuery);
   }, [typedPosts, searchQuery]);
 
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const validPage = Math.min(currentPage, Math.max(1, totalPages));
+
+  const paginatedPosts = useMemo(() => {
+    const start = (validPage - 1) * POSTS_PER_PAGE;
+    return filteredPosts.slice(start, start + POSTS_PER_PAGE);
+  }, [filteredPosts, validPage]);
+
+  // 페이지 변경 함수
+  const setPage = (page: number) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (page === 1) {
+      newParams.delete("p");
+    } else {
+      newParams.set("p", String(page));
+    }
+    setSearchParams(newParams);
+  };
+
+  // 표시할 페이지 번호 계산 (최대 5개)
+  const getVisiblePages = () => {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    let start = Math.max(1, validPage - 2);
+    let end = Math.min(totalPages, start + 4);
+
+    if (end - start < 4) {
+      start = Math.max(1, end - 4);
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  };
+
   const handleSearch = () => {
+    // 검색 시 페이지를 1로 초기화
     if (inputValue.trim()) {
       setSearchParams({ q: inputValue.trim() });
     } else {
@@ -127,11 +166,72 @@ const Blog = () => {
               {searchQuery ? "검색 결과가 없습니다." : "아직 작성된 글이 없습니다."}
             </div>
           ) : (
-            <div className="grid gap-6">
-              {filteredPosts.map((post) => (
-                <BlogPostCard key={post.id} post={post} />
-              ))}
-            </div>
+            <>
+              <div className="grid gap-6">
+                {paginatedPosts.map((post) => (
+                  <BlogPostCard key={post.id} post={post} />
+                ))}
+              </div>
+
+              {/* 페이지네이션 */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-1 mt-12">
+                  {/* 첫 페이지로 */}
+                  <button
+                    onClick={() => setPage(1)}
+                    disabled={validPage === 1}
+                    className="p-2 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-border disabled:hover:bg-card"
+                  >
+                    <ChevronsLeft className="w-5 h-5" />
+                  </button>
+
+                  {/* 이전 페이지 */}
+                  <button
+                    onClick={() => setPage(validPage - 1)}
+                    disabled={validPage === 1}
+                    className="p-2 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-border disabled:hover:bg-card"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  {/* 페이지 번호들 */}
+                  <div className="flex items-center gap-1 mx-2">
+                    {getVisiblePages().map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => setPage(page)}
+                        disabled={page === validPage}
+                        className={`w-10 h-10 rounded-lg border transition-all ${
+                          page === validPage
+                            ? "border-primary bg-primary/20 text-primary font-semibold cursor-default"
+                            : "border-border bg-card hover:border-primary/50 hover:bg-card-hover"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* 다음 페이지 */}
+                  <button
+                    onClick={() => setPage(validPage + 1)}
+                    disabled={validPage === totalPages}
+                    className="p-2 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-border disabled:hover:bg-card"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+
+                  {/* 마지막 페이지로 */}
+                  <button
+                    onClick={() => setPage(totalPages)}
+                    disabled={validPage === totalPages}
+                    className="p-2 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:border-border disabled:hover:bg-card"
+                  >
+                    <ChevronsRight className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </main>

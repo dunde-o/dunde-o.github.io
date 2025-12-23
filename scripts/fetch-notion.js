@@ -168,17 +168,36 @@ async function fetchBlogPosts() {
   );
 
   try {
-    // v5에서는 search API를 사용하여 데이터베이스 페이지 검색
-    const response = await notion.search({
-      filter: {
-        property: "object",
-        value: "page",
-      },
-    });
+    // search API를 사용하여 모든 페이지 검색 (페이지네이션 적용)
+    const allPages = [];
+    let cursor;
 
-    // 해당 데이터베이스에 속한 페이지만 필터링 (v5에서는 data_source_id 사용)
-    const databasePages = response.results.filter((page) => {
+    do {
+      const response = await notion.search({
+        filter: {
+          property: "object",
+          value: "page",
+        },
+        start_cursor: cursor,
+        page_size: 100,
+      });
+      allPages.push(...response.results);
+      cursor = response.has_more ? response.next_cursor : undefined;
+    } while (cursor);
+
+    console.log(`Total pages found: ${allPages.length}`);
+
+    // 디버깅: 첫 번째 페이지의 in_trash, archived 값 확인
+    if (allPages.length > 0) {
+      const samplePage = allPages[0];
+      console.log(`Sample page - in_trash: ${samplePage.in_trash}, archived: ${samplePage.archived}`);
+    }
+
+    // 해당 데이터베이스에 속한 페이지만 필터링 + 휴지통/아카이브 페이지 제외
+    const databasePages = allPages.filter((page) => {
       if (page.object !== "page") return false;
+      if (page.in_trash === true) return false; // 휴지통에 있는 페이지 제외
+      if (page.archived === true) return false; // 아카이브된 페이지 제외
 
       const parentType = page.parent?.type;
       const parentId =
@@ -190,6 +209,8 @@ async function fetchBlogPosts() {
         parentId === databaseId.replace(/-/g, "")
       );
     });
+
+    console.log(`Database pages (excluding trash): ${databasePages.length}`);
 
     const posts = await Promise.all(
       databasePages.map(async (page) => {
