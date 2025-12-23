@@ -17,12 +17,16 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // 코드 블록 내용을 제거한 후 헤딩 추출
+    // ```...``` 코드 블록을 빈 문자열로 대체
+    const contentWithoutCodeBlocks = content.replace(/```[\s\S]*?```/g, "");
+
     // 마크다운에서 헤딩 추출
     const headingRegex = /^(#{1,3})\s+(.+)$/gm;
     const items: TocItem[] = [];
     let match;
 
-    while ((match = headingRegex.exec(content)) !== null) {
+    while ((match = headingRegex.exec(contentWithoutCodeBlocks)) !== null) {
       const level = match[1].length;
       const text = match[2].replace(/[*_`]/g, "").trim();
       const id = text
@@ -87,11 +91,12 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
           <li key={id} style={{ paddingLeft: `${(level - 1) * 12}px` }}>
             <button
               onClick={() => handleClick(id)}
-              className={`text-left text-sm transition-colors hover:text-primary ${
+              className={`block w-full text-left text-sm transition-colors hover:text-primary truncate ${
                 activeId === id
                   ? "text-primary font-medium"
                   : "text-muted-foreground"
               }`}
+              title={text}
             >
               {text}
             </button>
@@ -104,7 +109,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
   return (
     <>
       {/* 1900px 이상: 우측 고정 */}
-      <nav className="hidden min-[1900px]:block fixed right-8 top-1/2 -translate-y-1/2 w-64 max-h-[60vh] overflow-y-auto">
+      <nav className="hidden min-[1900px]:block fixed right-8 top-1/2 -translate-y-1/2 w-64 max-h-[60vh] overflow-y-auto toc-scrollbar">
         <TocList />
       </nav>
 
@@ -112,7 +117,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
       <div className="min-[1900px]:hidden fixed right-6 top-24 z-40">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="p-3 rounded-full bg-card border border-border hover:border-primary/50 transition-colors"
+          className="p-3 rounded-full bg-card border border-border hover:border-primary/50 transition-colors shadow-lg shadow-background/50"
           aria-label="목차 열기/닫기"
         >
           {isOpen ? (
@@ -125,10 +130,10 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
         {isOpen && (
           <>
             <div
-              className="fixed inset-0 bg-background/50 backdrop-blur-sm z-40"
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
               onClick={() => setIsOpen(false)}
             />
-            <nav className="absolute right-0 top-12 w-64 max-h-[60vh] overflow-y-auto bg-card border border-border rounded-lg p-4 shadow-lg z-50">
+            <nav className="absolute right-0 top-14 w-72 max-h-[60vh] overflow-y-auto toc-scrollbar bg-card/95 backdrop-blur-md border border-border/50 rounded-xl p-5 shadow-xl shadow-primary/5 z-50">
               <TocList />
             </nav>
           </>
