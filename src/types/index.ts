@@ -13,6 +13,7 @@ export interface BlogPost {
   updatedAt: string;
   category: string;
   tags: string[];
+  series?: string | null;
   coverImage?: string | null;
   content: string;
 }

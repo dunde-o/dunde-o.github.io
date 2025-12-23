@@ -261,6 +261,10 @@ async function fetchBlogPosts() {
           category:
             properties.category?.select?.name || "",
           tags: properties.tag?.multi_select?.map((tag) => tag.name) || [],
+          series:
+            properties.series?.select?.name ||
+            properties.series?.rich_text?.[0]?.plain_text ||
+            null,
           coverImage,
           content,
         };

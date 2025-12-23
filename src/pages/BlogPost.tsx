@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useMemo } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import CodeBlock from "@/components/CodeBlock";
@@ -9,6 +9,7 @@ import type { BlogPost as BlogPostType } from "@/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const generateId = (text: string) =>
   String(text)
@@ -22,6 +23,41 @@ const BlogPost = () => {
 
   const typedPosts = posts as BlogPostType[];
   const post = typedPosts.find((p) => p.slug === slug);
+
+  // 같은 시리즈의 이전/다음 포스트 찾기
+  const seriesNavigation = useMemo(() => {
+    if (!post?.series) return null;
+
+    const seriesPosts = typedPosts
+      .filter((p) => p.series === post.series)
+      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
+    const currentIndex = seriesPosts.findIndex((p) => p.slug === slug);
+    if (currentIndex === -1) return null;
+
+    return {
+      seriesName: post.series,
+      totalCount: seriesPosts.length,
+      currentIndex: currentIndex + 1,
+      prev: currentIndex > 0 ? seriesPosts[currentIndex - 1] : null,
+      next: currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null,
+    };
+  }, [post, typedPosts, slug]);
+
+  // 전체 글 순서로 이전/다음 포스트 찾기 (createdAt 내림차순 기준)
+  const postNavigation = useMemo(() => {
+    if (!post) return null;
+
+    // posts.json은 이미 createdAt 내림차순으로 정렬되어 있음
+    const currentIndex = typedPosts.findIndex((p) => p.slug === slug);
+    if (currentIndex === -1) return null;
+
+    return {
+      // 내림차순이므로 prev는 인덱스가 더 큰 것(더 오래된 글), next는 인덱스가 더 작은 것(더 최신 글)
+      prev: currentIndex < typedPosts.length - 1 ? typedPosts[currentIndex + 1] : null,
+      next: currentIndex > 0 ? typedPosts[currentIndex - 1] : null,
+    };
+  }, [post, typedPosts, slug]);
 
   useEffect(() => {
     if (post) {
@@ -238,10 +274,75 @@ const BlogPost = () => {
               {post.content}
             </ReactMarkdown>
           </div>
+
+          {/* 전체 글 순서 네비게이션 */}
+          <div className="mt-16 pt-8 border-t border-border">
+            <div className="flex gap-4">
+              {postNavigation?.prev ? (
+                <Link
+                  to={`/blog/${postNavigation.prev.slug}`}
+                  className="w-1/2 min-w-0 p-4 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all group"
+                >
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                    <ChevronLeft className="w-4 h-4 flex-shrink-0" />
+                    <span>이전 글</span>
+                  </div>
+                  <p className="text-foreground group-hover:text-primary transition-colors truncate">
+                    {postNavigation.prev.title}
+                  </p>
+                </Link>
+              ) : (
+                <div className="w-1/2 min-w-0 p-4 rounded-lg border border-border/50 bg-card/50">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground/50 mb-1">
+                    <ChevronLeft className="w-4 h-4 flex-shrink-0" />
+                    <span>이전 글</span>
+                  </div>
+                  <p className="text-muted-foreground/50 truncate">
+                    이전 글이 없습니다.
+                  </p>
+                </div>
+              )}
+
+              {postNavigation?.next ? (
+                <Link
+                  to={`/blog/${postNavigation.next.slug}`}
+                  className="w-1/2 min-w-0 p-4 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all group text-right"
+                >
+                  <div className="flex items-center justify-end gap-2 text-sm text-muted-foreground mb-1">
+                    <span>다음 글</span>
+                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                  </div>
+                  <p className="text-foreground group-hover:text-primary transition-colors truncate">
+                    {postNavigation.next.title}
+                  </p>
+                </Link>
+              ) : (
+                <div className="w-1/2 min-w-0 p-4 rounded-lg border border-border/50 bg-card/50 text-right">
+                  <div className="flex items-center justify-end gap-2 text-sm text-muted-foreground/50 mb-1">
+                    <span>다음 글</span>
+                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                  </div>
+                  <p className="text-muted-foreground/50 truncate">
+                    다음 글이 없습니다.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* 목록으로 돌아가기 */}
+            <div className="mt-6 text-center">
+              <Link
+                to="/blog"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                <span>목록으로 돌아가기</span>
+              </Link>
+            </div>
+          </div>
         </article>
       </main>
 
-      <TableOfContents content={post.content} />
+      <TableOfContents content={post.content} seriesNavigation={seriesNavigation} />
     </div>
   );
 };
