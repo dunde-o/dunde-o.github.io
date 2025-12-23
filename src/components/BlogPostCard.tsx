@@ -13,6 +13,11 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
           {/* 컨텐츠 영역 */}
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap gap-2 mb-3">
+              {post.series && (
+                <span className="px-2 py-1 text-xs rounded-full bg-rose-500/20 text-rose-400">
+                  {post.series}
+                </span>
+              )}
               {post.category && (
                 <span className="px-2 py-1 text-xs rounded-full bg-secondary text-secondary-foreground">
                   {post.category}

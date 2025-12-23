@@ -112,6 +112,11 @@ const BlogPost = () => {
           )}
 
           <div className="flex flex-wrap gap-2 mb-4">
+            {post.series && (
+              <span className="px-3 py-1 text-sm rounded-full bg-rose-500/20 text-rose-400">
+                {post.series}
+              </span>
+            )}
             {post.category && (
               <span className="px-3 py-1 text-sm rounded-full bg-secondary text-secondary-foreground">
                 {post.category}
