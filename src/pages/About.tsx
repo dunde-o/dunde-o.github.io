@@ -12,7 +12,10 @@ const About = () => {
       
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
         <div className="animate-fade-in">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-to))] bg-clip-text text-transparent">
+          <h1
+            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-to))] bg-clip-text text-transparent"
+            style={{ lineHeight: 1.5 }}
+          >
             About Me
           </h1>
           
