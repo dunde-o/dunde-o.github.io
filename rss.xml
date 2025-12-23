@@ -5,17 +5,24 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 22 Dec 2025 16:58:08 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 23 Dec 2025 09:02:29 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>제목 테스트</title>
+      <title>[ADP] 1. 데이터 이해 - 데이터의 이해</title>
       <link>https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</link>
       <guid isPermaLink="true">https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</guid>
       <pubDate>Mon, 22 Dec 2025 00:00:00 GMT</pubDate>
-      <description>React와 AI를 결합한 개발 경험 프론트엔드 개발에 생성형 AI를 활용하면서 느낀 점과 생산성 향상 팁을 공유합니다. 들어가며 최근 AI 도구들이 개발 워크플로우에 깊숙이 들어오면서 개발 방식이 크게 변화하고 있습니다. 특히 코드 작성, 디버깅, 리팩토링 과정에서 AI의 도움을 받으면 생산성이 눈에 띄게 향상됩니다. AI 활용 사례 1. 코드 자동 완성 2. 버그 디버깅 복잡한 에러 메시지를 AI에게 전달하면 원인과 해결책을 빠르게 파악할 수 있습니다. 3. 리팩토링 제안 기존 코드를 더 깔끔하고 효율적으로 개선하는 방법을 제안</description>
-      <category>test category</category>
-      <category>test tag 1</category>
-      <category>test tag 2</category>
+      <description>데이터와 정보 데이터 정의
+추론과 추정의 근거를 이루는 사실, 다른 객체와 상호 관계 속에 가치를 가짐. 데이터 특성
+존재적 특성: 객관적 사실(Fact, Raw Material)
+당위적 특성: 추론, 예측, 전망, 추정을 위한 근거(Basis) 데이터 유형
+정성적 데이터(Qualitative Data): 비정형, 주관적, 저장/검색/분석에 많은 비용 소모
+정량적 데이터(Quantitative Data): 정형, 객관적, 적은 비용 소모
+차이점 확인 지식경영 핵심 이슈
+암묵지: 경험 지식, 공유 어려움, 개인에게 축적된 내면화(In</description>
+      <category>자격증</category>
+      <category>공부</category>
+      <category>ADP</category>
     </item>
   </channel>
 </rss>
