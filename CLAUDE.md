@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 yarn dev             # Start dev server on localhost:8080
-yarn build           # Production build to dist/
+yarn build           # Production build to dist/ (uses vite-react-ssg for SSG)
 yarn lint            # Run ESLint
 yarn preview         # Preview production build
 yarn deploy          # Deploy to GitHub Pages (runs predeploy automatically)
@@ -20,15 +20,15 @@ yarn generate:seo    # Generate RSS feed and sitemap → public/
 
 React + TypeScript portfolio site with Notion-powered blog, deployed to GitHub Pages.
 
-**Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Router, TanStack Query, Notion API
+**Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Router, TanStack Query, Notion API, vite-react-ssg (Static Site Generation)
 
 **Key Directories:**
 - `src/pages/` - Route components (Index, About, Blog, BlogPost, NotFound)
-- `src/components/` - Custom components (Navbar, ProjectCard, BlogPostCard, NavLink)
+- `src/components/` - Custom components (Navbar, ProjectCard, BlogPostCard, Quiz, QuizList, TableOfContents, etc.)
 - `src/components/ui/` - shadcn/ui components
 - `src/data/` - Static JSON data (projects.json, posts.json)
 - `src/types/` - TypeScript type definitions
-- `src/lib/` - Utilities (notion.ts for blog data access)
+- `src/lib/` - Utilities (notion.ts for blog data access, search.ts for blog search)
 - `scripts/` - Build-time scripts (fetch-notion.js, generate-rss.js, generate-sitemap.js)
 
 **Routing:** Configured in `src/App.tsx`. Routes: `/`, `/about`, `/blog`, `/blog/:slug`, `*` (404)
@@ -45,6 +45,21 @@ Blog posts are fetched from Notion at build time (not runtime) due to GitHub Pag
 3. React app imports posts.json directly
 
 **Environment:** Requires `.env` with `VITE_NOTION_API_KEY` and `VITE_NOTION_DATABASE_ID`
+
+## Blog Content Markers
+
+Special markers in blog markdown content are parsed and rendered as interactive components:
+
+- `🅰️` - Renders AdPlaceholder component (horizontal ad)
+- `❔{...}❔` - Renders Quiz component (single question, objective or subjective)
+- `❔[{...}]❔` or `❔{"items":[...]}❔` - Renders QuizList component (multiple questions with batch grading)
+
+**Quiz JSON Format:**
+- Objective: `{"question":"...", "options":["A","B","C"], "answer":0, "explanation":"..."}`
+- Subjective: `{"question":"...", "answer":"text", "explanation":"..."}`
+- List: `[{...quiz1}, {...quiz2}]` or `{"items":[...]}`
+
+**Note:** Notion's special quotes (`""''`) are automatically normalized to standard quotes before JSON parsing.
 
 ## Styling
 

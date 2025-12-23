@@ -6,12 +6,100 @@ import ImageWithLoader from "@/components/ImageWithLoader";
 import CodeBlock from "@/components/CodeBlock";
 import TableOfContents from "@/components/TableOfContents";
 import Giscus from "@/components/Giscus";
+import Quiz from "@/components/Quiz";
+import QuizList from "@/components/QuizList";
 import posts from "@/data/posts.json";
 import type { BlogPost as BlogPostType } from "@/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
+// 노션 특수 따옴표를 표준 따옴표로 변환
+const normalizeQuotes = (str: string) =>
+  str
+    .replace(/[""]/g, '"') // 특수 쌍따옴표 → 표준 쌍따옴표
+    .replace(/['']/g, "'"); // 특수 홑따옴표 → 표준 홑따옴표
+
+// 퀴즈 JSON 파싱 함수
+const parseQuizData = (quizString: string) => {
+  try {
+    const normalized = normalizeQuotes(quizString.trim());
+    const data = JSON.parse(normalized);
+
+    // 리스트형 퀴즈: 배열이거나 items 배열이 있는 경우
+    const items = Array.isArray(data) ? data : data.items;
+    if (Array.isArray(items) && items.length > 0) {
+      // 각 아이템이 유효한 퀴즈인지 확인
+      const validItems = items.every(
+        (item: { question?: string; answer?: unknown }) =>
+          item.question && item.answer !== undefined
+      );
+      if (validItems) {
+        return { type: "list", items };
+      }
+      return null;
+    }
+
+    // 단일 퀴즈: question + answer
+    if (data.question && data.answer !== undefined) {
+      // 객관식인 경우 options 배열과 number answer 확인
+      if (Array.isArray(data.options) && data.options.length > 0) {
+        if (typeof data.answer === "number") {
+          return { type: "single", data };
+        }
+        return null;
+      }
+      // 주관식인 경우 (options 없음)
+      return { type: "single", data };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+// 콘텐츠를 마크다운과 특수 요소로 분리
+const parseContent = (content: string) => {
+  // 🅰️ (광고)와 ❔...❔ (퀴즈) 패턴으로 분리
+  const parts: { type: "markdown" | "ad" | "quiz"; content: string }[] = [];
+
+  // 먼저 광고와 퀴즈를 찾아서 분리
+  const regex = /(🅰️|❔[\s\S]*?❔)/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(content)) !== null) {
+    // 이전 마크다운 부분
+    if (match.index > lastIndex) {
+      parts.push({
+        type: "markdown",
+        content: content.slice(lastIndex, match.index),
+      });
+    }
+
+    // 매칭된 특수 요소
+    if (match[0] === "🅰️") {
+      parts.push({ type: "ad", content: "" });
+    } else if (match[0].startsWith("❔")) {
+      // ❔...❔ 사이의 JSON 추출
+      const quizContent = match[0].slice(1, -1).trim();
+      parts.push({ type: "quiz", content: quizContent });
+    }
+
+    lastIndex = regex.lastIndex;
+  }
+
+  // 마지막 마크다운 부분
+  if (lastIndex < content.length) {
+    parts.push({
+      type: "markdown",
+      content: content.slice(lastIndex),
+    });
+  }
+
+  return parts;
+};
 
 const generateId = (text: string) =>
   String(text)
@@ -113,13 +201,15 @@ const BlogPost = () => {
           </button>
 
           {post.coverImage && (
-            <div className="mb-8 rounded-xl overflow-hidden">
-              <ImageWithLoader
-                src={post.coverImage}
-                alt={post.title}
-                className="w-full h-64 md:h-96 object-cover"
-                containerClassName="h-64 md:h-96"
-              />
+            <div className="mb-8 rainbow-border">
+              <div className="overflow-hidden">
+                <ImageWithLoader
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="w-full h-64 md:h-96 object-cover"
+                  containerClassName="h-64 md:h-96"
+                />
+              </div>
             </div>
           )}
 
@@ -186,9 +276,42 @@ const BlogPost = () => {
           <AdPlaceholder type="horizontal" />
 
           <div className="prose prose-invert prose-lg max-w-none break-keep">
-            {post.content.split(/🅰️/g).map((section, index, array) => (
-              <div key={index}>
+            {parseContent(post.content).map((part, index) => {
+              if (part.type === "ad") {
+                return (
+                  <div key={index} className="my-8">
+                    <AdPlaceholder type="horizontal" />
+                  </div>
+                );
+              }
+
+              if (part.type === "quiz") {
+                const quizResult = parseQuizData(part.content);
+                if (quizResult) {
+                  if (quizResult.type === "list") {
+                    return (
+                      <QuizList
+                        key={index}
+                        items={quizResult.items}
+                      />
+                    );
+                  }
+                  return (
+                    <Quiz
+                      key={index}
+                      question={quizResult.data.question}
+                      options={quizResult.data.options}
+                      answer={quizResult.data.answer}
+                      explanation={quizResult.data.explanation}
+                    />
+                  );
+                }
+                return null;
+              }
+
+              return (
                 <ReactMarkdown
+                  key={index}
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
                   components={{
@@ -304,15 +427,10 @@ const BlogPost = () => {
                     ),
                   }}
                 >
-                  {section}
+                  {part.content}
                 </ReactMarkdown>
-                {index < array.length - 1 && (
-                  <div className="my-8">
-                    <AdPlaceholder type="horizontal" />
-                  </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* 전체 글 순서 네비게이션 */}

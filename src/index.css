@@ -158,4 +158,46 @@ All colors MUST be HSL.
   .toc-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary) / 0.5);
   }
+
+  /* 무지개 테두리 애니메이션 */
+  @property --rainbow-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .rainbow-border {
+    position: relative;
+    border-radius: 0.75rem;
+    padding: 3px;
+    background: conic-gradient(
+      from var(--rainbow-angle),
+      #ff0000,
+      #ff8000,
+      #ffff00,
+      #80ff00,
+      #00ff00,
+      #00ff80,
+      #00ffff,
+      #0080ff,
+      #0000ff,
+      #8000ff,
+      #ff00ff,
+      #ff0080,
+      #ff0000
+    );
+    animation: rainbow-rotate 3s linear infinite;
+  }
+
+  .rainbow-border > * {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: calc(0.75rem - 3px);
+  }
+
+  @keyframes rainbow-rotate {
+    to {
+      --rainbow-angle: 360deg;
+    }
+  }
 }
