@@ -19,7 +19,7 @@ const AdCard = () => {
   const isAdLoaded = useRef(false);
 
   useEffect(() => {
-    if (isDev) return; // 개발 환경에서는 광고 로드 스킵
+    if (isDev) return;
 
     if (adRef.current && !isAdLoaded.current) {
       const timer = setTimeout(() => {
@@ -67,19 +67,20 @@ const AdCard = () => {
       className="project-card-wrapper"
     >
       <Card className="group relative overflow-hidden bg-card border-border hover:border-primary/50 transition-colors duration-300 hover:shadow-lg hover:shadow-primary/10 h-full">
-        <div className="flex flex-col items-center justify-center h-full min-h-[200px] p-6">
-          {isDev ? (
-            <div className="w-full h-full flex items-center justify-center bg-white rounded-lg">
-              <img
-                src="/images/google_ads_logo_icon.png"
-                alt="AD"
-                className="h-12 object-contain opacity-50"
-              />
-            </div>
-          ) : (
+        <div className="flex flex-col items-center justify-center h-full min-h-[200px] p-6 relative">
+          {/* 배경 플레이스홀더 - 항상 표시 */}
+          <div className="absolute inset-6 flex items-center justify-center bg-white rounded-lg">
+            <img
+              src="/images/google_ads_logo_icon.png"
+              alt="AD"
+              className="h-12 object-contain opacity-50"
+            />
+          </div>
+          {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
+          {!isDev && (
             <ins
               ref={adRef}
-              className="adsbygoogle"
+              className="adsbygoogle relative z-10"
               style={{ display: "block" }}
               data-ad-client="ca-pub-4277713048680567"
               data-ad-slot="7937230497"
