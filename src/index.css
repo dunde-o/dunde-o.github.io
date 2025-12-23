@@ -73,79 +73,66 @@ All colors MUST be HSL.
   body {
     @apply text-foreground;
     font-family: 'GyeonggiMillenniumTitle', sans-serif;
-    background:
-      radial-gradient(ellipse at 20% 20%, hsl(260 40% 15% / 0.4) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, hsl(200 50% 12% / 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, hsl(280 30% 10% / 0.2) 0%, transparent 70%),
-      linear-gradient(180deg,
-        hsl(240 30% 4%) 0%,
-        hsl(250 35% 8%) 30%,
-        hsl(230 30% 6%) 60%,
-        hsl(220 40% 4%) 100%
-      );
+    background: linear-gradient(180deg,
+      hsl(240 30% 4%) 0%,
+      hsl(250 35% 8%) 30%,
+      hsl(230 30% 6%) 60%,
+      hsl(220 40% 4%) 100%
+    );
     background-attachment: fixed;
     min-height: 100vh;
-  }
-
-  /* 부드러운 불빛 효과 - 개별 레이어 */
-  body::before,
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    filter: blur(8px);
-    z-index: 0;
-  }
-
-  body::before {
-    background-image:
-      radial-gradient(25px 25px at 10% 15%, hsl(200 60% 70% / 0.15) 0%, transparent 100%),
-      radial-gradient(35px 35px at 75% 25%, hsl(260 50% 75% / 0.12) 0%, transparent 100%),
-      radial-gradient(20px 20px at 85% 70%, hsl(180 50% 65% / 0.15) 0%, transparent 100%),
-      radial-gradient(30px 30px at 25% 80%, hsl(220 60% 70% / 0.1) 0%, transparent 100%);
-    animation: floatLights1 45s ease-in-out infinite;
-  }
-
-  body::after {
-    background-image:
-      radial-gradient(22px 22px at 50% 45%, hsl(280 40% 75% / 0.12) 0%, transparent 100%),
-      radial-gradient(28px 28px at 15% 50%, hsl(240 50% 72% / 0.1) 0%, transparent 100%),
-      radial-gradient(18px 18px at 90% 40%, hsl(200 45% 70% / 0.12) 0%, transparent 100%);
-    animation: floatLights2 60s ease-in-out infinite;
-  }
-
-  @keyframes floatLights1 {
-    0%, 100% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-    33% {
-      transform: translate(15px, -20px);
-      opacity: 0.85;
-    }
-    66% {
-      transform: translate(-10px, 15px);
-      opacity: 0.95;
-    }
-  }
-
-  @keyframes floatLights2 {
-    0%, 100% {
-      transform: translate(0, 0);
-      opacity: 0.9;
-    }
-    50% {
-      transform: translate(-20px, -10px);
-      opacity: 1;
-    }
   }
 
   #root {
     position: relative;
     z-index: 1;
+  }
+
+  .background-effect {
+    --mouse-x: 0px;
+    --mouse-y: 0px;
+  }
+
+  /* 배경 그라데이션 레이어 */
+  .background-effect .bg-gradient {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background:
+      radial-gradient(ellipse at 20% 20%, hsl(260 40% 15% / 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, hsl(200 50% 12% / 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, hsl(280 30% 10% / 0.2) 0%, transparent 70%);
+    transform: translate(calc(var(--mouse-x) * 0.3), calc(var(--mouse-y) * 0.3));
+  }
+
+  /* 불빛 레이어 */
+  .background-effect::before,
+  .background-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(8px);
+  }
+
+  .background-effect::before {
+    background-image:
+      radial-gradient(25px 25px at 10% 15%, hsl(200 60% 70% / 0.15) 0%, transparent 100%),
+      radial-gradient(35px 35px at 75% 25%, hsl(260 50% 75% / 0.12) 0%, transparent 100%),
+      radial-gradient(20px 20px at 85% 70%, hsl(180 50% 65% / 0.15) 0%, transparent 100%),
+      radial-gradient(30px 30px at 25% 80%, hsl(220 60% 70% / 0.1) 0%, transparent 100%);
+    transform: translate(calc(var(--mouse-x) * -1), calc(var(--mouse-y) * -1));
+  }
+
+  .background-effect::after {
+    background-image:
+      radial-gradient(22px 22px at 50% 45%, hsl(280 40% 75% / 0.12) 0%, transparent 100%),
+      radial-gradient(28px 28px at 15% 50%, hsl(240 50% 72% / 0.1) 0%, transparent 100%),
+      radial-gradient(18px 18px at 90% 40%, hsl(200 45% 70% / 0.12) 0%, transparent 100%);
+    transform: translate(var(--mouse-x), var(--mouse-y));
   }
 }
