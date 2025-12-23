@@ -11,7 +11,7 @@
     "generate:seo": "yarn generate:rss && yarn generate:sitemap",
     "deploy": "echo 'www.dunde.kr' > ./dist/CNAME && gh-pages -d dist",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite-react-ssg build && cp dist/index.html dist/404.html",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "predeploy": "yarn fetch:notion && yarn generate:seo && yarn build",
@@ -73,6 +73,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
+    "vite-react-ssg": "^0.8.9",
     "zod": "^3.25.76"
   },
   "devDependencies": {

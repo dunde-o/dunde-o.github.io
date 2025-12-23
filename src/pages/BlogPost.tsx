@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import ImageWithLoader from "@/components/ImageWithLoader";
 import CodeBlock from "@/components/CodeBlock";
 import TableOfContents from "@/components/TableOfContents";
-import { getBlogPostBySlug } from "@/lib/notion";
+import posts from "@/data/posts.json";
+import type { BlogPost as BlogPostType } from "@/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -20,15 +20,8 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
 
-  const {
-    data: post,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["blogPost", slug],
-    queryFn: () => getBlogPostBySlug(slug || ""),
-    enabled: !!slug,
-  });
+  const typedPosts = posts as BlogPostType[];
+  const post = typedPosts.find((p) => p.slug === slug);
 
   useEffect(() => {
     if (post) {
@@ -36,18 +29,7 @@ const BlogPost = () => {
     }
   }, [post]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
-          <div className="text-center text-muted-foreground">로딩 중...</div>
-        </main>
-      </div>
-    );
-  }
-
-  if (isError || !post) {
+  if (!post) {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
