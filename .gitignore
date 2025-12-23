@@ -31,3 +31,6 @@ dist-ssr
 # Generated SEO files
 public/rss.xml
 public/sitemap.xml
+
+# Generated image files
+public/images/blog/*

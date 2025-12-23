@@ -1,8 +1,11 @@
 import "dotenv/config";
 import { Client } from "@notionhq/client";
-import { writeFileSync } from "fs";
+import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import https from "https";
+import http from "http";
+import crypto from "crypto";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,6 +15,54 @@ const notion = new Client({
 });
 
 const databaseId = process.env.VITE_NOTION_DATABASE_ID;
+
+// 이미지 저장 디렉토리
+const IMAGE_DIR = join(__dirname, "../public/images/blog");
+
+// 이미지 다운로드 함수
+async function downloadImage(url, filename) {
+  return new Promise((resolve, reject) => {
+    const protocol = url.startsWith("https") ? https : http;
+
+    protocol.get(url, (response) => {
+      // 리다이렉트 처리
+      if (response.statusCode === 301 || response.statusCode === 302) {
+        downloadImage(response.headers.location, filename)
+          .then(resolve)
+          .catch(reject);
+        return;
+      }
+
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to download: ${response.statusCode}`));
+        return;
+      }
+
+      const chunks = [];
+      response.on("data", (chunk) => chunks.push(chunk));
+      response.on("end", () => {
+        const buffer = Buffer.concat(chunks);
+        const filepath = join(IMAGE_DIR, filename);
+        writeFileSync(filepath, buffer);
+        resolve(`/images/blog/${filename}`);
+      });
+      response.on("error", reject);
+    }).on("error", reject);
+  });
+}
+
+// URL에서 파일 확장자 추출
+function getExtension(url) {
+  const match = url.match(/\.(jpg|jpeg|png|gif|webp|svg)/i);
+  return match ? match[0].toLowerCase() : ".jpg";
+}
+
+// URL을 해시하여 고유 파일명 생성
+function generateFilename(url, pageId) {
+  const hash = crypto.createHash("md5").update(url).digest("hex").slice(0, 8);
+  const ext = getExtension(url);
+  return `${pageId.slice(0, 8)}-${hash}${ext}`;
+}
 
 // 블록을 마크다운으로 변환
 function blockToMarkdown(block) {
@@ -86,6 +137,12 @@ async function getPageContent(pageId) {
 async function fetchBlogPosts() {
   console.log("Fetching blog posts from Notion...");
 
+  // 이미지 디렉토리 생성
+  if (!existsSync(IMAGE_DIR)) {
+    mkdirSync(IMAGE_DIR, { recursive: true });
+    console.log(`Created image directory: ${IMAGE_DIR}`);
+  }
+
   try {
     // v5에서는 search API를 사용하여 데이터베이스 페이지 검색
     const response = await notion.search({
@@ -122,6 +179,26 @@ async function fetchBlogPosts() {
         // 페이지 본문 가져오기
         const content = await getPageContent(page.id);
 
+        // 커버 이미지 처리
+        let coverImage = null;
+        const coverUrl = page.cover?.external?.url || page.cover?.file?.url;
+
+        if (coverUrl) {
+          try {
+            // external URL은 그대로 사용, Notion 내부 URL만 다운로드
+            if (page.cover?.external?.url) {
+              coverImage = coverUrl;
+            } else {
+              const filename = generateFilename(coverUrl, page.id);
+              coverImage = await downloadImage(coverUrl, filename);
+              console.log(`Downloaded cover image for: ${titleProp?.title?.[0]?.plain_text || page.id}`);
+            }
+          } catch (error) {
+            console.error(`Failed to download cover image for ${page.id}:`, error.message);
+            coverImage = null;
+          }
+        }
+
         return {
           id: page.id,
           title: titleProp?.title?.[0]?.plain_text || "Untitled",
@@ -139,8 +216,7 @@ async function fetchBlogPosts() {
           category:
             properties.category?.select?.name || "",
           tags: properties.tag?.multi_select?.map((tag) => tag.name) || [],
-          coverImage:
-            page.cover?.external?.url || page.cover?.file?.url || null,
+          coverImage,
           content,
         };
       })
