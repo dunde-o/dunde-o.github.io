@@ -5,8 +5,23 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 23 Dec 2025 09:47:22 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 23 Dec 2025 10:16:48 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>React + Vite 프로젝트에 SSG(Static Site Generation) 적용하기</title>
+      <link>https://www.dunde.kr/blog/2d2ca0f9b5ae80409032efd8ac390190</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d2ca0f9b5ae80409032efd8ac390190</guid>
+      <pubDate>Tue, 23 Dec 2025 00:00:00 GMT</pubDate>
+      <description>왜 SSG가 필요한가? 일반적인 React SPA(Single Page Application)는 빌드 시 빈 HTML 껍데기만 생성됩니다. JavaScript가 실행되어야 컨텐츠가 렌더링되기 때문에:
+검색 엔진 크롤러가 컨텐츠를 제대로 인식하지 못할 수 있음
+초기 로딩 시 빈 화면이 잠시 보임 (First Contentful Paint 지연) SSG를 적용하면 빌드 시점에 각 페이지의 HTML을 미리 렌더링하여 이 문제를 해결할 수 있습니다. vite-react-ssg 설치 프로젝트 구조 변경 1. routes.tsx 생성 기존 A</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Vite</category>
+      <category>SSG</category>
+      <category>SEO</category>
+      <category>vite-react-ssg</category>
+    </item>
     <item>
       <title>[ADP] 1. 데이터 이해 - 데이터의 이해</title>
       <link>https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</link>
