@@ -187,14 +187,17 @@ const BlogPost = () => {
                   </p>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside text-muted-foreground mb-4 space-y-2">
+                  <ul className="list-disc text-muted-foreground mb-4 pl-6 [&_ul]:mt-0 [&_ul]:mb-0">
                     {children}
                   </ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside text-muted-foreground mb-4 space-y-2">
+                  <ol className="list-decimal text-muted-foreground mb-4 pl-6 [&_ol]:mt-0 [&_ol]:mb-0">
                     {children}
                   </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="my-1 [&>p]:mb-1">{children}</li>
                 ),
                 blockquote: ({ children }) => (
                   <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-6">
