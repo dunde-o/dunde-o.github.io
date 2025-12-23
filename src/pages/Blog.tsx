@@ -20,6 +20,11 @@ const Blog = () => {
     document.title = "Dunde's Portfolio | Blog";
   }, []);
 
+  // URL의 검색어가 변경되면 inputValue도 동기화
+  useEffect(() => {
+    setInputValue(searchQuery);
+  }, [searchQuery]);
+
   const typedPosts = posts as BlogPost[];
 
   const filteredPosts = useMemo(() => {

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
 import type { BlogPost } from "@/lib/notion";
 
@@ -14,22 +15,32 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap gap-2 mb-3">
               {post.series && (
-                <span className="px-2 py-1 text-xs rounded-full bg-rose-500/20 text-rose-400">
+                <Link
+                  to={`/blog?q=!${encodeURIComponent(post.series)}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="px-2 py-1 text-xs rounded-full bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 hover:shadow-[0_0_8px_rgba(244,63,94,0.4)] transition-all"
+                >
                   {post.series}
-                </span>
+                </Link>
               )}
               {post.category && (
-                <span className="px-2 py-1 text-xs rounded-full bg-secondary text-secondary-foreground">
+                <Link
+                  to={`/blog?q=@${encodeURIComponent(post.category)}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="px-2 py-1 text-xs rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-[0_0_8px_rgba(148,163,184,0.4)] transition-all"
+                >
                   {post.category}
-                </span>
+                </Link>
               )}
               {post.tags.map((tag) => (
-                <span
+                <Link
                   key={tag}
-                  className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary"
+                  to={`/blog?q=%23${encodeURIComponent(tag)}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary hover:bg-primary/20 hover:shadow-[0_0_8px_rgba(var(--primary),0.4)] transition-all"
                 >
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
 
