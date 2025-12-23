@@ -135,4 +135,27 @@ All colors MUST be HSL.
       radial-gradient(18px 18px at 90% 40%, hsl(200 45% 70% / 0.12) 0%, transparent 100%);
     transform: translate(var(--mouse-x), var(--mouse-y));
   }
+
+  /* 목차 스크롤바 커스텀 */
+  .toc-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 4px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
 }
