@@ -4,7 +4,7 @@ import { Check, X, HelpCircle, ListChecks, ChevronUp, ChevronDown } from "lucide
 interface QuizItem {
   question: string;
   options?: string[];
-  answer: number | string;
+  answer: number | string; // 객관식: 1-based number (1, 2, 3, 4), 주관식: string
   explanation?: string;
 }
 
@@ -32,15 +32,17 @@ const QuizList = ({ items }: QuizListProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   // 각 문제별 셔플된 옵션과 정답 (마운트 시 한 번만)
+  // answer는 1-based 번호 (1, 2, 3, 4)
   const shuffledItems = useMemo(() => {
     return items.map((item) => {
       const isSubjective = !item.options || item.options.length === 0;
       if (isSubjective || typeof item.answer !== "number") {
         return { shuffledOptions: [], shuffledAnswer: 0, isSubjective: true };
       }
+      // answer를 0-based index로 변환하여 셔플
       const { shuffledOptions, shuffledAnswer } = shuffleWithAnswer(
         item.options,
-        item.answer
+        item.answer - 1
       );
       return { shuffledOptions, shuffledAnswer, isSubjective: false };
     });
