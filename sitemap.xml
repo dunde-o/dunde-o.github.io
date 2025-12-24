@@ -16,6 +16,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.dunde.kr/blog/2d3ca0f9b5ae80d1abf6ebe95bb229cf</loc>
+    <lastmod>2025-12-24T04:00:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.dunde.kr/blog/2d3ca0f9b5ae8095bce6c3db9f60ec7f</loc>
+    <lastmod>2025-12-24T03:56:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.dunde.kr/blog/2d2ca0f9b5ae80409032efd8ac390190</loc>
     <lastmod>2025-12-23T16:03:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
@@ -23,7 +35,7 @@
   </url>
   <url>
     <loc>https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</loc>
-    <lastmod>2025-12-23T16:03:00.000Z</lastmod>
+    <lastmod>2025-12-24T04:01:00.000Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

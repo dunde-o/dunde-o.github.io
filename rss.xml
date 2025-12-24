@@ -5,8 +5,34 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 23 Dec 2025 16:05:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 24 Dec 2025 04:02:15 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>[ADP] 1. 데이터 이해 - 데이터의 가치와 미래</title>
+      <link>https://www.dunde.kr/blog/2d3ca0f9b5ae80d1abf6ebe95bb229cf</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae80d1abf6ebe95bb229cf</guid>
+      <pubDate>Wed, 24 Dec 2025 03:58:00 GMT</pubDate>
+      <description></description>
+      <category>자격증</category>
+      <category>공부</category>
+      <category>ADP</category>
+    </item>
+    <item>
+      <title>Notion API로 정적 블로그 시스템 구축하기</title>
+      <link>https://www.dunde.kr/blog/2d3ca0f9b5ae8095bce6c3db9f60ec7f</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae8095bce6c3db9f60ec7f</guid>
+      <pubDate>Wed, 24 Dec 2025 03:20:00 GMT</pubDate>
+      <description>Notion API로 정적 블로그 시스템 구축하기 Notion을 CMS(Content Management System)로 활용하여 GitHub Pages에 배포하는 블로그 시스템을 구축하는 방법을 정리합니다. 왜 Notion을 CMS로? 블로그를 운영하려면 콘텐츠 관리 시스템이 필요합니다. 선택지는 다양합니다: | 방식 | 장점 | 단점 |
+|------|------|------|
+| 마크다운 파일 직접 관리 | 단순함, Git 버전관리 | 에디터 불편, 이미지 관리 번거로움 |
+| Headless CMS (Contentful, S</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Notion</category>
+      <category>API</category>
+      <category>Blog</category>
+      <category>Github Pages</category>
+    </item>
     <item>
       <title>React + Vite 프로젝트에 SSG(Static Site Generation) 적용하기</title>
       <link>https://www.dunde.kr/blog/2d2ca0f9b5ae80409032efd8ac390190</link>
@@ -33,8 +59,8 @@
 당위적 특성: 추론, 예측, 전망, 추정을 위한 근거(Basis) 데이터 유형
 정성적 데이터(Qualitative Data): 비정형, 주관적, 저장/검색/분석에 많은 비용 소모
 정량적 데이터(Quantitative Data): 정형, 객관적, 적은 비용 소모
-차이점 확인 지식경영 핵심 이슈
-암묵지: 경험 지식, 공유 어려움, 개인에게 축적된 내면화(In</description>
+차이점 확인 ❔{}❔ 지식경영 핵심 이슈
+암묵지: 경험 지식, 공유 어려움, 개인에게 축적된 내</description>
       <category>자격증</category>
       <category>공부</category>
       <category>ADP</category>
