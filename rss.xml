@@ -5,14 +5,22 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Dec 2025 04:36:06 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 24 Dec 2025 11:52:32 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>[ADP] 1. 데이터 이해 - 데이터의 가치와 미래</title>
       <link>https://www.dunde.kr/blog/2d3ca0f9b5ae80d1abf6ebe95bb229cf</link>
       <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae80d1abf6ebe95bb229cf</guid>
       <pubDate>Wed, 24 Dec 2025 03:58:00 GMT</pubDate>
-      <description></description>
+      <description>빅데이터의 이해 빅데이터 정의 정의 범위에 따른 구분 | 범위 | 초점 |
+|------|------|
+| 좁은 범위 | 3V(Volume, Variety, Velocity) 데이터 자체 특성 |
+| 중간 범위 | 3V + 처리/분석 기술 변화 |
+| 넓은 범위 | 3V + 기술 + 인재/조직 변화 | 3V7V 개념 기본 3V (더그 래니, 가트너 그룹)
+Volume: 데이터 규모
+Variety: 데이터 유형/소스 다양성
+Velocity: 수집/처리 속도 확장 4V
+Value(가치), Veracity(진실성), Validity(정확</description>
       <category>자격증</category>
       <category>공부</category>
       <category>ADP</category>
@@ -53,13 +61,13 @@
       <link>https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</link>
       <guid isPermaLink="true">https://www.dunde.kr/blog/2d1ca0f9b5ae80abad48e2218c646286</guid>
       <pubDate>Mon, 22 Dec 2025 14:59:00 GMT</pubDate>
-      <description>데이터와 정보 데이터 정의
-추론과 추정의 근거를 이루는 사실, 다른 객체와 상호 관계 속에 가치를 가짐. 데이터 특성
-존재적 특성: 객관적 사실(Fact, Raw Material)
-당위적 특성: 추론, 예측, 전망, 추정을 위한 근거(Basis) 데이터 유형
-정성적 데이터(Qualitative Data): 비정형, 주관적, 저장/검색/분석에 많은 비용 소모
-정량적 데이터(Quantitative Data): 정형, 객관적, 적은 비용 소모
-차이점 확인 ❔{&quot;question&quot;:&quot;다음 중 정성적 데이터(Qualitative Data)의 </description>
+      <description>데이터와 정보 데이터 개념 데이터: 추론과 추정의 근거가 되는 객관적 사실. 다른 객체와의 관계 속에서 가치 발생. 데이터 특성 존재적 특성
+객관적 사실 그 자체 (Fact, Raw Material) 당위적 특성
+추론, 예측, 전망의 근거 (Basis) 데이터 유형 | 구분 | 정성적 데이터 | 정량적 데이터 |
+|------|--------------|--------------|
+| 형태 | 비정형 | 정형 |
+| 성격 | 주관적 | 객관적 |
+| 비용 | 높음 | 낮음 | 정성적 데이터는 비정형/주관적/고비용, 정량적 데이터는 </description>
       <category>자격증</category>
       <category>공부</category>
       <category>ADP</category>
