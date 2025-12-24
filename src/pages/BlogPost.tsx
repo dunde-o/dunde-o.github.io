@@ -291,14 +291,14 @@ const BlogPost = () => {
                   if (quizResult.type === "list") {
                     return (
                       <QuizList
-                        key={index}
+                        key={`${slug}-quiz-${index}`}
                         items={quizResult.items}
                       />
                     );
                   }
                   return (
                     <Quiz
-                      key={index}
+                      key={`${slug}-quiz-${index}`}
                       question={quizResult.data.question}
                       options={quizResult.data.options}
                       answer={quizResult.data.answer}
