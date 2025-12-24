@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
+import { Loader2 } from "lucide-react";
 import type { BlogPost } from "@/lib/notion";
 
 interface BlogPostCardProps {
@@ -7,6 +9,15 @@ interface BlogPostCardProps {
 }
 
 const BlogPostCard = ({ post }: BlogPostCardProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const navigate = useNavigate();
+
+  const handleTagClick = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(path);
+  };
+
   return (
     <NavLink to={`/blog/${post.slug}`} className="block group">
       <article className="p-6 rounded-xl border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:scale-[1.02] hover:-translate-y-1">
@@ -15,32 +26,29 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap gap-2 mb-3">
               {post.series && (
-                <Link
-                  to={`/blog?q=!${encodeURIComponent(post.series)}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="px-2 py-1 text-xs rounded-full bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 hover:shadow-[0_0_8px_rgba(244,63,94,0.4)] transition-all"
+                <span
+                  onClick={(e) => handleTagClick(e, `/blog?q=!${encodeURIComponent(post.series!)}`)}
+                  className="px-2 py-1 text-xs rounded-full bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 hover:shadow-[0_0_8px_rgba(244,63,94,0.4)] transition-all cursor-pointer"
                 >
                   {post.series}
-                </Link>
+                </span>
               )}
               {post.category && (
-                <Link
-                  to={`/blog?q=@${encodeURIComponent(post.category)}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="px-2 py-1 text-xs rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-[0_0_8px_rgba(148,163,184,0.4)] transition-all"
+                <span
+                  onClick={(e) => handleTagClick(e, `/blog?q=@${encodeURIComponent(post.category!)}`)}
+                  className="px-2 py-1 text-xs rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-[0_0_8px_rgba(148,163,184,0.4)] transition-all cursor-pointer"
                 >
                   {post.category}
-                </Link>
+                </span>
               )}
               {post.tags.map((tag) => (
-                <Link
+                <span
                   key={tag}
-                  to={`/blog?q=%23${encodeURIComponent(tag)}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary hover:bg-primary/20 hover:shadow-[0_0_8px_rgba(var(--primary),0.4)] transition-all"
+                  onClick={(e) => handleTagClick(e, `/blog?q=%23${encodeURIComponent(tag)}`)}
+                  className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary hover:bg-primary/20 hover:shadow-[0_0_8px_rgba(var(--primary),0.4)] transition-all cursor-pointer"
                 >
                   {tag}
-                </Link>
+                </span>
               ))}
             </div>
 
@@ -71,11 +79,21 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
           {/* 커버 이미지 영역 */}
           {post.coverImage && (
             <div className="flex-shrink-0 hidden sm:flex items-center">
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                className="w-40 h-40 object-cover rounded-lg"
-              />
+              <div className="relative w-40 h-40">
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-muted rounded-lg">
+                    <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                  </div>
+                )}
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className={`w-40 h-40 object-cover rounded-lg transition-opacity duration-300 ${
+                    imageLoaded ? "opacity-100" : "opacity-0"
+                  }`}
+                  onLoad={() => setImageLoaded(true)}
+                />
+              </div>
             </div>
           )}
         </div>
