@@ -140,7 +140,7 @@ const Blog = () => {
                 {/* 검색 도움말 버튼 */}
                 <div className="relative group/help">
                   <HelpCircle className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors cursor-help peer" />
-                  <div className="absolute right-0 top-8 w-72 p-4 rounded-xl border border-primary/30 bg-card/95 backdrop-blur-sm text-sm opacity-0 invisible peer-hover:opacity-100 peer-hover:visible transition-all duration-150 z-50 shadow-[0_0_20px_hsl(var(--primary)/0.2)] pointer-events-none">
+                  <div className="absolute right-0 bottom-8 w-72 p-4 rounded-xl border border-primary/30 bg-card/95 backdrop-blur-sm text-sm opacity-0 invisible peer-hover:opacity-100 peer-hover:visible transition-all duration-150 z-50 shadow-[0_0_20px_hsl(var(--primary)/0.2)] pointer-events-none">
                     <p className="text-muted-foreground mb-2">검색 문법:</p>
                     <div className="grid grid-cols-2 gap-2 text-xs">
                       <span className="px-2 py-1 rounded bg-muted text-muted-foreground">

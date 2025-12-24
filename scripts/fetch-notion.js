@@ -34,14 +34,14 @@ function loadExistingPosts() {
 }
 
 // 이미지 다운로드 함수
-async function downloadImage(url, filename) {
+async function downloadImage(url, filename, targetDir = IMAGE_DIR) {
   return new Promise((resolve, reject) => {
     const protocol = url.startsWith("https") ? https : http;
 
     protocol.get(url, (response) => {
       // 리다이렉트 처리
       if (response.statusCode === 301 || response.statusCode === 302) {
-        downloadImage(response.headers.location, filename)
+        downloadImage(response.headers.location, filename, targetDir)
           .then(resolve)
           .catch(reject);
         return;
@@ -56,9 +56,13 @@ async function downloadImage(url, filename) {
       response.on("data", (chunk) => chunks.push(chunk));
       response.on("end", () => {
         const buffer = Buffer.concat(chunks);
-        const filepath = join(IMAGE_DIR, filename);
+        const filepath = join(targetDir, filename);
         writeFileSync(filepath, buffer);
-        resolve(`/images/blog/${filename}`);
+        // 상대 경로 반환 (IMAGE_DIR 기준)
+        const relativePath = targetDir === IMAGE_DIR
+          ? `/images/blog/${filename}`
+          : `/images/blog/${targetDir.split('/images/blog/')[1]}/${filename}`;
+        resolve(relativePath);
       });
       response.on("error", reject);
     }).on("error", reject);
@@ -82,35 +86,45 @@ function generateFilename(url, pageId) {
   return `${pageId.slice(0, 8)}-${hash}${ext}`;
 }
 
-// 블록을 마크다운으로 변환
-function blockToMarkdown(block) {
+// 블록을 마크다운으로 변환 (이미지 처리 시 pageId 필요)
+function blockToMarkdown(block, pageId = null, imageDownloader = null) {
   const type = block.type;
   const content = block[type];
 
   switch (type) {
     case "paragraph":
-      return richTextToMarkdown(content?.rich_text) + "\n";
+      return { text: richTextToMarkdown(content?.rich_text) + "\n", imagePromise: null };
     case "heading_1":
-      return `# ${richTextToMarkdown(content?.rich_text)}\n`;
+      return { text: `# ${richTextToMarkdown(content?.rich_text)}\n`, imagePromise: null };
     case "heading_2":
-      return `## ${richTextToMarkdown(content?.rich_text)}\n`;
+      return { text: `## ${richTextToMarkdown(content?.rich_text)}\n`, imagePromise: null };
     case "heading_3":
-      return `### ${richTextToMarkdown(content?.rich_text)}\n`;
+      return { text: `### ${richTextToMarkdown(content?.rich_text)}\n`, imagePromise: null };
     case "bulleted_list_item":
-      return `- ${richTextToMarkdown(content?.rich_text)}\n`;
+      return { text: `- ${richTextToMarkdown(content?.rich_text)}\n`, imagePromise: null };
     case "numbered_list_item":
-      return `1. ${richTextToMarkdown(content?.rich_text)}\n`;
+      return { text: `1. ${richTextToMarkdown(content?.rich_text)}\n`, imagePromise: null };
     case "quote":
-      return `> ${richTextToMarkdown(content?.rich_text)}\n`;
+      return { text: `> ${richTextToMarkdown(content?.rich_text)}\n`, imagePromise: null };
     case "code":
-      return `\`\`\`${content?.language || ""}\n${richTextToMarkdown(content?.rich_text)}\n\`\`\`\n`;
+      return { text: `\`\`\`${content?.language || ""}\n${richTextToMarkdown(content?.rich_text)}\n\`\`\`\n`, imagePromise: null };
     case "divider":
-      return "---\n";
+      return { text: "---\n", imagePromise: null };
     case "image":
       const url = content?.file?.url || content?.external?.url || "";
-      return `![image](${url})\n`;
+      const caption = richTextToMarkdown(content?.caption);
+
+      // 이미지 다운로더가 제공된 경우 비동기로 처리
+      if (imageDownloader && url && pageId) {
+        const imagePromise = imageDownloader(url, pageId, caption);
+        return { text: null, imagePromise, caption };
+      }
+
+      // 캡션이 있으면 alt에 포함 (크기 태그 포함)
+      const altText = caption || "image";
+      return { text: `![${altText}](${url})\n`, imagePromise: null };
     default:
-      return "";
+      return { text: "", imagePromise: null };
   }
 }
 
@@ -131,7 +145,7 @@ function richTextToMarkdown(richText) {
 }
 
 // 페이지의 모든 블록 가져오기
-async function getPageContent(pageId) {
+async function getPageContent(pageId, isUpdated) {
   try {
     const blocks = [];
     let cursor;
@@ -145,7 +159,89 @@ async function getPageContent(pageId) {
       cursor = response.has_more ? response.next_cursor : undefined;
     } while (cursor);
 
-    return blocks.map(blockToMarkdown).join("\n");
+    // postId별 이미지 저장 디렉토리
+    const postImageDir = join(IMAGE_DIR, pageId.slice(0, 8));
+
+    // 디렉토리 생성
+    if (!existsSync(postImageDir)) {
+      mkdirSync(postImageDir, { recursive: true });
+    }
+
+    // 이미지 다운로드 함수 (커버 이미지와 동일한 캐싱 로직 적용)
+    const downloadContentImage = async (url, pageId, caption) => {
+      const isExternalUrl = !url.includes("secure.notion-static.com") && !url.includes("prod-files-secure");
+
+      if (isExternalUrl) {
+        // 외부 URL은 그대로 사용
+        return { localPath: url, caption };
+      }
+
+      const filename = generateFilename(url, pageId);
+      const fullPath = join(postImageDir, filename);
+      const localPath = `/images/blog/${pageId.slice(0, 8)}/${filename}`;
+
+      // 파일이 없거나 포스트가 업데이트된 경우에만 다운로드
+      if (!existsSync(fullPath)) {
+        // 파일이 없으면 무조건 다운로드
+        try {
+          await downloadImage(url, filename, postImageDir);
+          console.log(`  Downloaded content image (new): ${filename}`);
+          return { localPath, caption };
+        } catch (error) {
+          console.error(`  Failed to download content image: ${error.message}`);
+          return { localPath: url, caption };
+        }
+      } else if (isUpdated) {
+        // 포스트가 업데이트되었으면 이미지도 다시 다운로드
+        try {
+          await downloadImage(url, filename, postImageDir);
+          console.log(`  Downloaded content image (updated): ${filename}`);
+          return { localPath, caption };
+        } catch (error) {
+          console.error(`  Failed to download content image: ${error.message}`);
+          // 다운로드 실패 시 기존 파일 유지
+          return { localPath, caption };
+        }
+      } else {
+        // 파일이 존재하고 업데이트되지 않았으면 캐시 사용
+        return { localPath, caption };
+      }
+    };
+
+    // 블록을 마크다운으로 변환하며 이미지 프로미스 수집
+    const results = blocks.map(block => blockToMarkdown(block, pageId, downloadContentImage));
+
+    // 이미지 프로미스 처리
+    const imagePromises = results
+      .map((r, i) => ({ result: r, index: i }))
+      .filter(item => item.result.imagePromise !== null);
+
+    // 모든 이미지 다운로드 완료 대기
+    const imageResults = await Promise.all(
+      imagePromises.map(item => item.result.imagePromise)
+    );
+
+    // 결과를 인덱스에 맞게 매핑
+    const imageMap = new Map();
+    imagePromises.forEach((item, i) => {
+      imageMap.set(item.index, imageResults[i]);
+    });
+
+    // 최종 마크다운 조합
+    const markdownParts = results.map((r, i) => {
+      if (r.text !== null) {
+        return r.text;
+      }
+      // 이미지인 경우
+      const imageData = imageMap.get(i);
+      if (imageData) {
+        const altText = imageData.caption || "image";
+        return `![${altText}](${imageData.localPath})\n`;
+      }
+      return "";
+    });
+
+    return markdownParts.join("\n");
   } catch (error) {
     console.error(`Error fetching content for page ${pageId}:`, error.message);
     return "";
@@ -233,8 +329,8 @@ async function fetchBlogPosts() {
         const existingPost = existingPostsMap.get(page.id);
         const isUpdated = !existingPost || existingPost.updatedAt !== currentUpdatedAt;
 
-        // 페이지 본문 가져오기
-        const content = await getPageContent(page.id);
+        // 페이지 본문 가져오기 (isUpdated 전달하여 이미지 다운로드 여부 결정)
+        const content = await getPageContent(page.id, isUpdated);
 
         // 커버 이미지 처리
         let coverImage = null;
