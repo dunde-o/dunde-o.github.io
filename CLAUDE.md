@@ -61,6 +61,34 @@ Special markers in blog markdown content are parsed and rendered as interactive 
 
 **Note:** Notion's special quotes (`""''`) are automatically normalized to standard quotes before JSON parsing.
 
+## Image Caption Syntax
+
+Images in blog posts support size and position control via caption prefix tags:
+
+**Format:** `[{size}{position}] caption text`
+
+**Size (required when using tag):**
+- `s` - Small (1/3 width)
+- `m` - Medium (1/2 width)
+- `l` - Large (full width)
+
+**Position (optional, defaults to center):**
+- `l` - Left align
+- `c` - Center align
+- `r` - Right align
+
+**Examples:**
+- `[mc]` - Medium size, centered (default position)
+- `[sl]` - Small size, left aligned
+- `[mr]` - Medium size, right aligned
+- `[l]` - Large/full size, centered (position omitted = center)
+- No tag - Full size, centered
+
+**Image Caching:**
+- Content images are saved to `public/images/blog/{postId}/`
+- Images are only re-downloaded when the post's `updatedAt` changes
+- External URLs (non-Notion) are used as-is without downloading
+
 ## Styling
 
 - Dark theme by default (CSS variables in `src/index.css`)

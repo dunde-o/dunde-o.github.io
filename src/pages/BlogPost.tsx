@@ -416,15 +416,47 @@ const BlogPost = () => {
                         {children}
                       </td>
                     ),
-                    img: ({ src, alt }) => (
-                      <div className="flex justify-center my-6">
-                        <ImageWithLoader
-                          src={src || ""}
-                          alt={alt || ""}
-                          className="rounded-lg max-w-full"
-                        />
-                      </div>
-                    ),
+                    img: ({ src, alt }) => {
+                      // 캡션에서 크기+위치 태그 파싱 ([sl], [mc], [lr] 등)
+                      // 첫 글자: 크기 (s=1/3, m=1/2, l=full)
+                      // 두 번째 글자: 위치 (l=left, c=center, r=right)
+                      const tagMatch = alt?.match(/^\[([sml])([lcr])?\]/i);
+                      const sizeTag = tagMatch ? tagMatch[1].toLowerCase() : null;
+                      const posTag = tagMatch ? (tagMatch[2]?.toLowerCase() || "c") : "c";
+                      const cleanAlt = alt?.replace(/^\[[sml][lcr]?\]\s*/i, "") || "";
+
+                      // 크기에 따른 너비 클래스
+                      const sizeClass = sizeTag === "s"
+                        ? "w-1/3"
+                        : sizeTag === "m"
+                        ? "w-1/2"
+                        : "max-w-full";
+
+                      // 위치에 따른 정렬 클래스
+                      const alignClass = posTag === "l"
+                        ? "justify-start"
+                        : posTag === "r"
+                        ? "justify-end"
+                        : "justify-center";
+
+                      return (
+                        <figure className="my-6">
+                          <div className={`flex ${alignClass}`}>
+                            <ImageWithLoader
+                              src={src || ""}
+                              alt={cleanAlt}
+                              className="rounded-lg"
+                              containerClassName={sizeClass}
+                            />
+                          </div>
+                          {cleanAlt && cleanAlt !== "image" && (
+                            <figcaption className="text-center text-sm text-muted-foreground mt-2">
+                              {cleanAlt}
+                            </figcaption>
+                          )}
+                        </figure>
+                      );
+                    },
                   }}
                 >
                   {part.content}
