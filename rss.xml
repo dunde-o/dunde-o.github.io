@@ -5,7 +5,7 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Dec 2025 04:02:15 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 24 Dec 2025 04:10:10 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>[ADP] 1. 데이터 이해 - 데이터의 가치와 미래</title>
@@ -59,8 +59,7 @@
 당위적 특성: 추론, 예측, 전망, 추정을 위한 근거(Basis) 데이터 유형
 정성적 데이터(Qualitative Data): 비정형, 주관적, 저장/검색/분석에 많은 비용 소모
 정량적 데이터(Quantitative Data): 정형, 객관적, 적은 비용 소모
-차이점 확인 ❔{}❔ 지식경영 핵심 이슈
-암묵지: 경험 지식, 공유 어려움, 개인에게 축적된 내</description>
+차이점 확인 ❔{&quot;question&quot;:&quot;다음 중 정성적 데이터(Qualitative Data)의 </description>
       <category>자격증</category>
       <category>공부</category>
       <category>ADP</category>
