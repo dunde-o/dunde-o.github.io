@@ -5,8 +5,69 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Dec 2025 12:09:41 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 24 Dec 2025 14:54:11 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>블로그 목차(TOC) 스크롤 동기화 구현하기</title>
+      <link>https://www.dunde.kr/blog/2d3ca0f9b5ae80f796efd0036879b1bf</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae80f796efd0036879b1bf</guid>
+      <pubDate>Wed, 24 Dec 2025 14:29:00 GMT</pubDate>
+      <description>블로그 목차(TOC) 스크롤 동기화 구현하기 긴 블로그 포스트에서 현재 읽고 있는 위치를 표시하는 목차(Table of Contents)를 구현했습니다. IntersectionObserver API를 활용한 스크롤 동기화 방식을 정리합니다. 요구사항 마크다운 헤딩(h1h3)을 자동 추출
+현재 보이는 섹션 하이라이트
+클릭 시 해당 섹션으로 스무스 스크롤
+반응형: 데스크톱은 우측 고정, 모바일은 햄버거 메뉴 🅰️ 헤딩 추출 마크다운에서 헤딩 파싱 ...[\s\S]? 코드 블록 제외 이유 마크다운 코드 블록 내부에도 으로 시작하는 주석</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Component</category>
+    </item>
+    <item>
+      <title>GitHub Discussions 기반 댓글 시스템 (Giscus) 적용기</title>
+      <link>https://www.dunde.kr/blog/2d3ca0f9b5ae808bb3cdc1abbfb40786</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae808bb3cdc1abbfb40786</guid>
+      <pubDate>Wed, 24 Dec 2025 14:27:00 GMT</pubDate>
+      <description>GitHub Discussions 기반 댓글 시스템 (Giscus) 적용기 블로그에 댓글 기능을 추가하고 싶었습니다. 별도 백엔드 없이 GitHub Discussions를 활용하는 Giscus를 적용한 과정입니다. Giscus란? Giscus는 GitHub Discussions를 댓글 저장소로 사용하는 오픈소스 댓글 시스템입니다. | 특징 | 설명 |
+|------|------|
+| 무료 | GitHub 계정만 있으면 사용 가능 |
+| 서버리스 | 별도 백엔드 불필요 |
+| 다크모드 | 테마 지원 |
+| 리액션 | GitHub 이모</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Giscus</category>
+    </item>
+    <item>
+      <title>React에서 커스텀 블로그 검색 구현하기</title>
+      <link>https://www.dunde.kr/blog/2d3ca0f9b5ae80b495d4feb92933a7a2</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae80b495d4feb92933a7a2</guid>
+      <pubDate>Wed, 24 Dec 2025 14:26:00 GMT</pubDate>
+      <description>React에서 커스텀 블로그 검색 구현하기 블로그 포스트가 늘어나면서 검색 기능이 필요해졌습니다. 단순 텍스트 검색뿐 아니라 시리즈, 카테고리, 태그별 필터링과 AND/OR 조합까지 지원하는 검색 시스템을 구현한 과정입니다. 요구사항 제목, 내용에서 키워드 검색
+시리즈 필터: 
+카테고리 필터: 
+태그 필터: 
+AND 조건: 
+OR 조건: 
+그룹화: 
+URL 쿼리 파라미터 연동 🅰️ 검색 문법 설계 연산자와 우선순위 | 연산자 | 의미 | 우선순위 |
+|--------|------|----------|
+|  | 그룹화 | 최고 |
+</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Search</category>
+    </item>
+    <item>
+      <title>마크다운에 인터랙티브 Quiz 컴포넌트 구현하기</title>
+      <link>https://www.dunde.kr/blog/2d3ca0f9b5ae8014be3bc762f050ba00</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d3ca0f9b5ae8014be3bc762f050ba00</guid>
+      <pubDate>Wed, 24 Dec 2025 14:24:00 GMT</pubDate>
+      <description>마크다운에 인터랙티브 Quiz 컴포넌트 구현하기 블로그 포스트에 학습용 퀴즈를 삽입하고 싶었습니다. 마크다운 본문 중간에 특수 마커를 넣으면 React 컴포넌트로 렌더링되는 방식을 구현한 과정을 정리합니다. 목표 마크다운 본문에  형식으로 퀴즈 삽입
+객관식: 보기 순서 랜덤화 + 정답 추적
+주관식: 텍스트 입력 후 정답 비교
+복수 문제:  형식으로 일괄 채점 🅰️ 마커 파싱 로직 콘텐츠 분리 마크다운 본문을 일반 텍스트와 특수 마커로 분리합니다. JSON 파싱 시 주의사항 Notion에서 복사한 텍스트는 특수 따옴표()를 사용할 </description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Component</category>
+    </item>
     <item>
       <title>[ADP] 1. 데이터 이해 - 데이터의 가치와 미래</title>
       <link>https://www.dunde.kr/blog/2d3ca0f9b5ae80d1abf6ebe95bb229cf</link>
