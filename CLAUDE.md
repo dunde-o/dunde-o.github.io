@@ -55,7 +55,7 @@ Special markers in blog markdown content are parsed and rendered as interactive 
 - `❔[{...}]❔` or `❔{"items":[...]}❔` - Renders QuizList component (multiple questions with batch grading)
 
 **Quiz JSON Format:**
-- Objective: `{"question":"...", "options":["A","B","C"], "answer":0, "explanation":"..."}`
+- Objective: `{"question":"...", "options":["A","B","C","D"], "answer":3, "explanation":"..."}` (answer는 1-based 번호, 3번이 정답)
 - Subjective: `{"question":"...", "answer":"text", "explanation":"..."}`
 - List: `[{...quiz1}, {...quiz2}]` or `{"items":[...]}`
 
