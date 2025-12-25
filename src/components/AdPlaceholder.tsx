@@ -4,9 +4,9 @@ interface AdPlaceholderProps {
   type: "horizontal" | "vertical";
 }
 
-// 광고 사이즈
-// horizontal: 728px x 90px (Leaderboard)
-// vertical: 160px x 600px (Wide Skyscraper)
+// 반응형 광고
+// horizontal: gp-Leaderboard
+// vertical: gp-Wide-Skyscraper
 
 declare global {
   interface Window {
@@ -38,7 +38,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
 
   if (type === "horizontal") {
     return (
-      <div className="w-full max-w-[728px] h-[90px] mx-auto mb-8 flex items-center justify-center relative">
+      <div className="w-full mx-auto mb-8 flex items-center justify-center relative min-h-[90px]">
         {/* 배경 플레이스홀더 - 항상 표시 */}
         <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
           <img
@@ -52,9 +52,11 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
           <ins
             ref={adRef}
             className="adsbygoogle relative z-10"
-            style={{ display: "inline-block", width: "728px", height: "90px" }}
+            style={{ display: "block" }}
             data-ad-client="ca-pub-4277713048680567"
             data-ad-slot="1958963743"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
           />
         )}
       </div>
@@ -62,7 +64,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
   }
 
   return (
-    <div className="w-[160px] h-[600px] flex items-center justify-center relative">
+    <div className="w-full flex items-center justify-center relative min-h-[250px]">
       {/* 배경 플레이스홀더 - 항상 표시 */}
       <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
         <img
@@ -76,9 +78,11 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
         <ins
           ref={adRef}
           className="adsbygoogle relative z-10"
-          style={{ display: "inline-block", width: "160px", height: "600px" }}
+          style={{ display: "block" }}
           data-ad-client="ca-pub-4277713048680567"
           data-ad-slot="3272045414"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
         />
       )}
     </div>
