@@ -238,17 +238,17 @@ const BlogPreview = () => {
               {/* 줄 번호 영역 */}
               <div
                 className="flex-shrink-0 bg-muted/30 border-r border-border select-none overflow-hidden"
-                style={{ width: `${Math.max(3, String(lines.length).length) * 0.6 + 1.5}rem` }}
+                style={{ width: `${Math.max(2, String(lines.length).length) * 0.6 + 0.5}rem` }}
               >
                 <div
                   ref={lineNumbersRef}
-                  className="pt-3 pb-3 font-mono text-xs text-right pr-3"
+                  className="pt-3 pb-3 font-mono text-xs text-right px-2"
                 >
                   {lines.map((_, index) => (
                     <div
                       key={index}
                       className={`${index % 2 === 0 ? 'text-muted-foreground/60' : 'text-muted-foreground/40'}`}
-                      style={{ height: 'calc(0.875rem * 1.7)', lineHeight: 'calc(0.875rem * 1.7)' }}
+                      style={{ height: '24px', lineHeight: '24px' }}
                     >
                       {index + 1}
                     </div>
@@ -257,8 +257,6 @@ const BlogPreview = () => {
               </div>
               {/* 텍스트 에디터 영역 */}
               <div className="flex-1 relative">
-                {/* 상단 패딩 오버레이 - 항상 회색 (첫 줄이 검정이므로 그 위는 회색) */}
-                <div className="absolute top-0 left-0 right-0 h-3 bg-white/[0.02] pointer-events-none z-10" />
                 <textarea
                   ref={editorRef}
                   id="preview-content"
@@ -267,7 +265,7 @@ const BlogPreview = () => {
                   onChange={(e) => setContent(e.target.value)}
                   onScroll={handleEditorScroll}
                   placeholder="마크다운으로 내용을 작성하세요..."
-                  className="absolute inset-0 w-full h-full px-4 py-3 bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none resize-none font-mono text-sm leading-[1.7] custom-scrollbar-blue editor-stripes whitespace-pre overflow-x-auto"
+                  className="absolute inset-0 w-full h-full px-4 py-3 bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none resize-none font-mono text-sm leading-[24px] custom-scrollbar-blue whitespace-pre overflow-x-auto"
                 />
               </div>
             </div>
