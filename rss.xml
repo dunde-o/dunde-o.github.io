@@ -5,8 +5,22 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Dec 2025 06:11:32 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 26 Dec 2025 09:55:50 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>[ADP] 1. 데이터 이해 - 가치 창조를 위한 데이터 사이언스와 전략 인사이트</title>
+      <link>https://www.dunde.kr/blog/2d5ca0f9b5ae805481cfc37fbc5aa866</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d5ca0f9b5ae805481cfc37fbc5aa866</guid>
+      <pubDate>Fri, 26 Dec 2025 07:34:00 GMT</pubDate>
+      <description>빅데이터 분석과 전략 인사이트 빅데이터 회의론의 원인과 진단 빅데이터 열풍과 함께 회의론도 곳곳에서 제기되고 있다. 이러한 회의론이 빅데이터 분석의 가치 탐색 가능성을 가로막는 것이 문제이다. 부정적 학습효과 CRM 사례 과거 CRM 도입 사례가 대표적이다. | 구분 | 내용 |
+|------|------|
+| 도입 시 기대 | 도입만 하면 모든 문제를 한번에 해소할 것처럼 강조 |
+| 현실 | 거액 투자 후에도 어떻게 활용하고 어떻게 가치를 뽑아내야 할지 난감 |
+| 빅데이터 성과 과장 | 기존 분석 프로젝트를 포함하여 성과 포장</description>
+      <category>자격증</category>
+      <category>공부</category>
+      <category>ADP</category>
+    </item>
     <item>
       <title>실시간 마크다운 프리뷰 에디터 구현기</title>
       <link>https://www.dunde.kr/blog/2d5ca0f9b5ae80fe8698ce2b78956327</link>
