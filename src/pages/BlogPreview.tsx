@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Monitor, FileText } from "lucide-react";
-import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from "lz-string";
+import LZString from "lz-string";
 import Navbar from "@/components/Navbar";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -38,7 +38,7 @@ const BlogPreview = () => {
     const dataParam = searchParams.get("d");
     if (dataParam) {
       try {
-        const decompressed = decompressFromEncodedURIComponent(dataParam);
+        const decompressed = LZString.decompressFromEncodedURIComponent(dataParam);
         if (decompressed) {
           const data = JSON.parse(decompressed);
           if (data.t) setTitle(data.t);
@@ -69,7 +69,7 @@ const BlogPreview = () => {
       const fromParam = initialFromRef.current;
       if (title || content) {
         const data = JSON.stringify({ t: title, c: content });
-        const compressed = compressToEncodedURIComponent(data);
+        const compressed = LZString.compressToEncodedURIComponent(data);
         const newParams: Record<string, string> = { d: compressed };
         if (fromParam) newParams.from = fromParam;
         setSearchParams(newParams, { replace: true });

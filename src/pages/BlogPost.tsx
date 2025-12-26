@@ -14,7 +14,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { ChevronLeft, ChevronRight, Edit3 } from "lucide-react";
-import { compressToEncodedURIComponent } from "lz-string";
+import LZString from "lz-string";
 
 // 노션 특수 따옴표를 표준 따옴표로 변환
 const normalizeQuotes = (str: string) =>
@@ -202,7 +202,7 @@ const BlogPost = () => {
               <span>목록으로</span>
             </button>
             <Link
-              to={`/blog/preview?d=${compressToEncodedURIComponent(JSON.stringify({ t: post.title, c: post.content }))}&from=${encodeURIComponent(post.slug)}`}
+              to={`/blog/preview?d=${LZString.compressToEncodedURIComponent(JSON.stringify({ t: post.title, c: post.content }))}&from=${encodeURIComponent(post.slug)}`}
               className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
             >
               <Edit3 className="w-4 h-4" />
