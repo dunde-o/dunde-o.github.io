@@ -430,6 +430,8 @@ const BlogPost = () => {
                         ? "w-1/3"
                         : sizeTag === "m"
                         ? "w-1/2"
+                        : sizeTag === "l"
+                        ? "w-full"
                         : "max-w-full";
 
                       // 위치에 따른 정렬 클래스
