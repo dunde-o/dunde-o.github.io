@@ -13,7 +13,8 @@ import type { BlogPost as BlogPostType } from "@/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Edit3 } from "lucide-react";
+import { compressToEncodedURIComponent } from "lz-string";
 
 // 노션 특수 따옴표를 표준 따옴표로 변환
 const normalizeQuotes = (str: string) =>
@@ -192,13 +193,22 @@ const BlogPost = () => {
 
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-20">
         <article className="animate-fade-in">
-          <button
-            onClick={() => navigate("/blog")}
-            className="text-muted-foreground hover:text-primary transition-colors mb-8 flex items-center gap-2"
-          >
-            <span>←</span>
-            <span>목록으로</span>
-          </button>
+          <div className="flex items-center justify-between mb-8">
+            <button
+              onClick={() => navigate("/blog")}
+              className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+            >
+              <span>←</span>
+              <span>목록으로</span>
+            </button>
+            <Link
+              to={`/blog/preview?d=${compressToEncodedURIComponent(JSON.stringify({ t: post.title, c: post.content }))}&from=${encodeURIComponent(post.slug)}`}
+              className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+            >
+              <Edit3 className="w-4 h-4" />
+              <span>글쓰기 프리뷰</span>
+            </Link>
+          </div>
 
           {post.coverImage && (
             <div className="mb-8 rainbow-border">
@@ -317,18 +327,22 @@ const BlogPost = () => {
                   components={{
                     code({ className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || "");
-                      const isInline = !match;
-                      return isInline ? (
+                      const codeString = String(children).replace(/\n$/, "");
+                      // 언어가 지정되었거나, 여러 줄이면 코드 블록으로 처리
+                      const isBlock = match || codeString.includes("\n");
+                      const language = match ? match[1] : "text";
+
+                      return isBlock ? (
+                        <CodeBlock language={language}>
+                          {codeString}
+                        </CodeBlock>
+                      ) : (
                         <code
                           className="bg-muted px-1.5 py-0.5 rounded text-sm"
                           {...props}
                         >
                           {children}
                         </code>
-                      ) : (
-                        <CodeBlock language={match[1]}>
-                          {String(children).replace(/\n$/, "")}
-                        </CodeBlock>
                       );
                     },
                     h1: ({ children }) => (

@@ -6,7 +6,8 @@ import AdPlaceholder from "@/components/AdPlaceholder";
 import posts from "@/data/posts.json";
 import type { BlogPost } from "@/types";
 import { searchPosts } from "@/lib/searchParser";
-import { Search, X, HelpCircle, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Search, X, HelpCircle, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, PenLine } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const POSTS_PER_PAGE = 6;
 
@@ -104,9 +105,18 @@ const Blog = () => {
             Blog
           </h1>
 
-          <p className="text-muted-foreground leading-relaxed text-lg mb-8">
-            개발 여정에서 배운 것들과 생각을 기록합니다.
-          </p>
+          <div className="flex items-center justify-between gap-4 mb-8">
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              개발 여정에서 배운 것들과 생각을 기록합니다.
+            </p>
+            <Link
+              to="/blog/preview"
+              className="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-card hover:border-primary/50 hover:bg-card-hover transition-all text-sm text-muted-foreground hover:text-primary"
+            >
+              <PenLine className="w-4 h-4" />
+              <span className="hidden sm:inline">글쓰기 프리뷰</span>
+            </Link>
+          </div>
 
           {/* 검색 영역 */}
           <div className="mb-8">

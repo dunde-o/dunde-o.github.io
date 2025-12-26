@@ -4,6 +4,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BlogPreview from "./pages/BlogPreview";
 import NotFound from "./pages/NotFound";
 import posts from "./data/posts.json";
 
@@ -23,6 +24,10 @@ export const routes: RouteRecord[] = [
       {
         path: "blog",
         element: <Blog />,
+      },
+      {
+        path: "blog/preview",
+        element: <BlogPreview />,
       },
       {
         path: "blog/:slug",

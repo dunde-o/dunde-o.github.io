@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 interface AdPlaceholderProps {
   type: "horizontal" | "vertical";
+  preview?: boolean;
 }
 
 // 반응형 광고
@@ -16,7 +17,7 @@ declare global {
 
 const isDev = import.meta.env.DEV;
 
-const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
+const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
   const adRef = useRef<HTMLModElement>(null);
   const isAdLoaded = useRef(false);
 
@@ -38,7 +39,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
 
   if (type === "horizontal") {
     return (
-      <div className="w-full mx-auto mb-8 flex items-center justify-center relative min-h-[90px]">
+      <div className="w-[728px] h-[90px] mx-auto mb-8 flex items-center justify-center relative">
         {/* 배경 플레이스홀더 - 항상 표시 */}
         <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
           <img
@@ -48,7 +49,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
           />
         </div>
         {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
-        {!isDev && (
+        {!isDev && !preview && (
           <ins
             ref={adRef}
             className="adsbygoogle relative z-10"
@@ -64,7 +65,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
   }
 
   return (
-    <div className="w-full flex items-center justify-center relative min-h-[250px]">
+    <div className="w-[160px] h-[600px] flex items-center justify-center relative">
       {/* 배경 플레이스홀더 - 항상 표시 */}
       <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
         <img
@@ -74,7 +75,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
         />
       </div>
       {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
-      {!isDev && (
+      {!isDev && !preview && (
         <ins
           ref={adRef}
           className="adsbygoogle relative z-10"
