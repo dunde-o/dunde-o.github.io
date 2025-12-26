@@ -38,7 +38,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
 
   if (type === "horizontal") {
     return (
-      <div className="w-full mx-auto mb-8 flex items-center justify-center relative min-h-[90px]">
+      <div className="w-[728px] h-[90px] mx-auto mb-8 flex items-center justify-center relative">
         {/* 배경 플레이스홀더 - 항상 표시 */}
         <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
           <img
@@ -64,7 +64,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
   }
 
   return (
-    <div className="w-full flex items-center justify-center relative min-h-[250px]">
+    <div className="w-[160px] h-[600px] flex items-center justify-center relative">
       {/* 배경 플레이스홀더 - 항상 표시 */}
       <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
         <img
