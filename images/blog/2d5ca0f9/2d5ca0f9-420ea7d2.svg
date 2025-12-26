@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <!-- Background -->
+  <rect width="900" height="400" fill="#0f172a"/>
+
+  <!-- Left Section: Traditional -->
+  <rect x="30" y="30" width="400" height="340" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="230" y="70" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#94a3b8" text-anchor="middle">기존 개발 방식</text>
+
+  <!-- Traditional Flow -->
+  <g transform="translate(80, 100)">
+    <rect x="0" y="0" width="300" height="32" rx="6" fill="#475569"/>
+    <text x="150" y="22" font-family="Arial, sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">요구사항 분석</text>
+
+    <path d="M150 36 L150 48" stroke="#64748b" stroke-width="2"/>
+    <polygon points="145,46 150,54 155,46" fill="#64748b"/>
+
+    <rect x="0" y="56" width="300" height="32" rx="6" fill="#475569"/>
+    <text x="150" y="78" font-family="Arial, sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">설계 및 구조 잡기</text>
+
+    <path d="M150 92 L150 104" stroke="#64748b" stroke-width="2"/>
+    <polygon points="145,102 150,110 155,102" fill="#64748b"/>
+
+    <rect x="0" y="112" width="300" height="32" rx="6" fill="#475569"/>
+    <text x="150" y="134" font-family="Arial, sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">코딩 (직접 작성)</text>
+
+    <path d="M150 148 L150 160" stroke="#64748b" stroke-width="2"/>
+    <polygon points="145,158 150,166 155,158" fill="#64748b"/>
+
+    <rect x="0" y="168" width="300" height="32" rx="6" fill="#475569"/>
+    <text x="150" y="190" font-family="Arial, sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">테스트 및 디버깅</text>
+
+    <!-- Loop back arrow -->
+    <path d="M305 184 C340 184, 340 70, 305 70" stroke="#f87171" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+    <polygon points="305,65 310,70 305,75" fill="#f87171"/>
+  </g>
+
+  <!-- Time Box Left -->
+  <rect x="130" y="310" width="200" height="45" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="230" y="337" font-family="Arial, sans-serif" font-size="14" fill="#f87171" text-anchor="middle">소요 시간: 약 5주</text>
+
+  <!-- Right Section: Vibe Coding -->
+  <rect x="470" y="30" width="400" height="340" rx="16" fill="#1e293b" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="670" y="70" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#a78bfa" text-anchor="middle">바이브 코딩</text>
+
+  <!-- Developer and AI -->
+  <g transform="translate(510, 100)">
+    <!-- Developer -->
+    <circle cx="40" cy="30" r="24" fill="#8b5cf6"/>
+    <text x="40" y="36" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">👨‍💻</text>
+    <text x="40" y="75" font-family="Arial, sans-serif" font-size="12" fill="#a78bfa" text-anchor="middle">개발자</text>
+
+    <!-- AI -->
+    <rect x="240" y="6" width="80" height="48" rx="10" fill="#6366f1"/>
+    <text x="280" y="38" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Claude</text>
+    <text x="280" y="75" font-family="Arial, sans-serif" font-size="12" fill="#a78bfa" text-anchor="middle">AI</text>
+
+    <!-- Arrows between -->
+    <path d="M75 25 L230 25" stroke="#22c55e" stroke-width="2"/>
+    <polygon points="228,20 238,25 228,30" fill="#22c55e"/>
+    <text x="152" y="18" font-family="Arial, sans-serif" font-size="10" fill="#22c55e" text-anchor="middle">요구사항</text>
+
+    <path d="M230 45 L75 45" stroke="#3b82f6" stroke-width="2"/>
+    <polygon points="77,40 67,45 77,50" fill="#3b82f6"/>
+    <text x="152" y="58" font-family="Arial, sans-serif" font-size="10" fill="#3b82f6" text-anchor="middle">코드 생성</text>
+  </g>
+
+  <!-- Vibe Coding Steps -->
+  <g transform="translate(520, 200)">
+    <rect x="0" y="0" width="320" height="36" rx="6" fill="#7c3aed"/>
+    <text x="160" y="24" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">요구사항 전달 → AI 코드 생성</text>
+
+    <path d="M160 40 L160 52" stroke="#8b5cf6" stroke-width="2"/>
+    <polygon points="155,50 160,58 165,50" fill="#8b5cf6"/>
+
+    <rect x="0" y="60" width="320" height="36" rx="6" fill="#7c3aed"/>
+    <text x="160" y="84" font-family="Arial, sans-serif" font-size="13" fill="white" text-anchor="middle">리뷰 → 피드백 → 수정</text>
+
+    <!-- Quick loop -->
+    <path d="M325 78 C355 78, 355 18, 325 18" stroke="#22c55e" stroke-width="2" fill="none"/>
+    <polygon points="325,13 330,18 325,23" fill="#22c55e"/>
+  </g>
+
+  <!-- Time Box Right -->
+  <rect x="570" y="310" width="200" height="45" rx="8" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+  <text x="670" y="337" font-family="Arial, sans-serif" font-size="14" fill="#22c55e" text-anchor="middle">소요 시간: 약 1일</text>
+
+</svg>
