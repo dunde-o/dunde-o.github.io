@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 interface AdPlaceholderProps {
   type: "horizontal" | "vertical";
+  preview?: boolean;
 }
 
 // 반응형 광고
@@ -16,7 +17,7 @@ declare global {
 
 const isDev = import.meta.env.DEV;
 
-const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
+const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
   const adRef = useRef<HTMLModElement>(null);
   const isAdLoaded = useRef(false);
 
@@ -48,7 +49,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
           />
         </div>
         {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
-        {!isDev && (
+        {!isDev && !preview && (
           <ins
             ref={adRef}
             className="adsbygoogle relative z-10"
@@ -74,7 +75,7 @@ const AdPlaceholder = ({ type }: AdPlaceholderProps) => {
         />
       </div>
       {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
-      {!isDev && (
+      {!isDev && !preview && (
         <ins
           ref={adRef}
           className="adsbygoogle relative z-10"

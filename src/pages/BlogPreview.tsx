@@ -327,7 +327,7 @@ const BlogPreview = () => {
                   if (part.type === "ad") {
                     return (
                       <div key={index} className="my-8">
-                        <AdPlaceholder type="horizontal" />
+                        <AdPlaceholder type="horizontal" preview />
                       </div>
                     );
                   }
