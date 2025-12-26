@@ -5,8 +5,33 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Dec 2025 09:58:53 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 26 Dec 2025 13:56:48 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>[ADP] 최신 빅데이터 상식</title>
+      <link>https://www.dunde.kr/blog/2d5ca0f9b5ae805bb82fca6509338937</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d5ca0f9b5ae805bb82fca6509338937</guid>
+      <pubDate>Fri, 26 Dec 2025 10:59:00 GMT</pubDate>
+      <description>DBMS와 SQL DBMS 개요 DBMS(Data Base Management System)는 데이터베이스를 관리하고 여러 응용 프로그램이 데이터를 공유할 수 있는 환경을 제공하는 소프트웨어임. 주요 기능:
+데이터베이스 구축 틀 제공
+효율적인 검색 및 저장 대표 제품: Oracle, MySQL, PostgreSQL 등 DBMS 종류 |유형|특징|
+|---|---|
+|관계형 DBMS|테이블(컬럼+로우) 구조, 고유키로 로우 식별. 로우=레코드/튜플, 컬럼=속성값|
+|객체지향 DBMS|정보를 객체 형태로 표현하는 모델|
+|네트워크 DB</description>
+      <category>자격증</category>
+      <category>공부</category>
+      <category>ADP</category>
+      <category>DBMS</category>
+      <category>SQL</category>
+      <category>NoSQL</category>
+      <category>data warehouse</category>
+      <category>ETL</category>
+      <category>Hadoop</category>
+      <category>Spark</category>
+      <category>빅데이터</category>
+      <category>머신러닝</category>
+    </item>
     <item>
       <title>[ADP] 1. 데이터 이해 - 가치 창조를 위한 데이터 사이언스와 전략 인사이트</title>
       <link>https://www.dunde.kr/blog/2d5ca0f9b5ae805481cfc37fbc5aa866</link>
