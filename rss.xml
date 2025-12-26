@@ -5,8 +5,23 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Dec 2025 05:52:24 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 26 Dec 2025 06:11:32 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>실시간 마크다운 프리뷰 에디터 구현기</title>
+      <link>https://www.dunde.kr/blog/2d5ca0f9b5ae80fe8698ce2b78956327</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d5ca0f9b5ae80fe8698ce2b78956327</guid>
+      <pubDate>Fri, 26 Dec 2025 05:58:00 GMT</pubDate>
+      <description>실시간 마크다운 프리뷰 에디터 구현기 블로그에 마크다운 글을 작성하면서 실시간으로 렌더링 결과를 확인할 수 있는 프리뷰 기능을 구현했습니다. Notion에서 글을 작성하기 전에 마크다운 문법과 커스텀 마커(퀴즈, 광고 등)가 어떻게 렌더링되는지 미리 확인할 수 있습니다. 기능 소개 접근 방법 프리뷰 페이지는 두 가지 방법으로 접근할 수 있습니다: 1. 블로그 목록 페이지 상단의 &quot;글쓰기 프리뷰&quot; 버튼
+2. 블로그 상세 페이지 각 포스트 상단의 &quot;글쓰기 프리뷰&quot; 버튼 (해당 글 내용이 자동으로 로드됨) 주요 기능 실시간 프리뷰: 좌측</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>TypeScript</category>
+      <category>Markdown</category>
+      <category>lz-string</category>
+      <category>SSG</category>
+      <category>URL 상태관리</category>
+    </item>
     <item>
       <title>AI 바이브 코딩, 한 달 걸리던 블로그를 하루 만에 만들다</title>
       <link>https://www.dunde.kr/blog/2d5ca0f9b5ae80758248de62024599c3</link>
