@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Monitor } from "lucide-react";
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from "lz-string";
@@ -20,11 +20,15 @@ const BlogPreview = () => {
   const [title, setTitle] = useState("");
   const [isSupported, setIsSupported] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
-
   const editorRef = useRef<HTMLTextAreaElement>(null);
+  const lineNumbersRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+  const proseRef = useRef<HTMLDivElement>(null);
   const isScrollingRef = useRef<"editor" | "preview" | null>(null);
   const updateTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // 줄 번호 배열 생성
+  const lines = useMemo(() => content.split("\n"), [content]);
 
   // URL 파라미터에서 초기값 로드
   useEffect(() => {
@@ -104,6 +108,15 @@ const BlogPreview = () => {
       isScrollingRef.current = null;
     }, 50);
   }, []);
+
+  // 에디터 스크롤시 줄 번호 동기화
+  const handleEditorScroll = useCallback((e: React.UIEvent<HTMLTextAreaElement>) => {
+    const scrollTop = e.currentTarget.scrollTop;
+    if (lineNumbersRef.current) {
+      lineNumbersRef.current.style.transform = `translateY(-${scrollTop}px)`;
+    }
+    syncScroll("editor");
+  }, [syncScroll]);
 
   // 마크다운 콘텐츠 파싱 (광고, 퀴즈 등)
   const parseContent = (text: string) => {
@@ -221,16 +234,43 @@ const BlogPreview = () => {
               className="w-full px-4 py-3 mb-4 rounded-lg border border-border bg-card text-foreground text-xl font-semibold placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
             />
 
-            <textarea
-              ref={editorRef}
-              id="preview-content"
-              name="preview-content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              onScroll={() => syncScroll("editor")}
-              placeholder="마크다운으로 내용을 작성하세요..."
-              className="flex-1 w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all resize-none font-mono text-sm min-h-[600px] custom-scrollbar-blue"
-            />
+            <div className="flex-1 flex rounded-lg border border-border bg-card overflow-hidden min-h-[600px] focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+              {/* 줄 번호 영역 */}
+              <div
+                className="flex-shrink-0 bg-muted/30 border-r border-border select-none overflow-hidden"
+                style={{ width: `${Math.max(3, String(lines.length).length) * 0.6 + 1.5}rem` }}
+              >
+                <div
+                  ref={lineNumbersRef}
+                  className="pt-3 pb-3 font-mono text-xs text-right pr-3"
+                >
+                  {lines.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`${index % 2 === 0 ? 'text-muted-foreground/60' : 'text-muted-foreground/40'}`}
+                      style={{ height: 'calc(0.875rem * 1.7)', lineHeight: 'calc(0.875rem * 1.7)' }}
+                    >
+                      {index + 1}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* 텍스트 에디터 영역 */}
+              <div className="flex-1 relative">
+                {/* 상단 패딩 오버레이 - 항상 회색 (첫 줄이 검정이므로 그 위는 회색) */}
+                <div className="absolute top-0 left-0 right-0 h-3 bg-white/[0.02] pointer-events-none z-10" />
+                <textarea
+                  ref={editorRef}
+                  id="preview-content"
+                  name="preview-content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  onScroll={handleEditorScroll}
+                  placeholder="마크다운으로 내용을 작성하세요..."
+                  className="absolute inset-0 w-full h-full px-4 py-3 bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none resize-none font-mono text-sm leading-[1.7] custom-scrollbar-blue editor-stripes whitespace-pre overflow-x-auto"
+                />
+              </div>
+            </div>
           </div>
 
           {/* 프리뷰 영역 */}
@@ -260,7 +300,7 @@ const BlogPreview = () => {
                 </>
               )}
 
-              <div className="prose prose-invert prose-lg max-w-none break-keep">
+              <div ref={proseRef} className="prose prose-invert prose-lg max-w-none break-keep">
                 {parsedContent.map((part, index) => {
                   if (part.type === "ad") {
                     return (

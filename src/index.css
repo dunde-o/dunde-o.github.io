@@ -136,6 +136,29 @@ All colors MUST be HSL.
     transform: translate(var(--mouse-x), var(--mouse-y));
   }
 
+  /* 에디터 줄무늬 배경 */
+  .editor-stripes {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(0.875rem * 1.7),
+      rgba(255, 255, 255, 0.02) calc(0.875rem * 1.7),
+      rgba(255, 255, 255, 0.02) calc(0.875rem * 1.7 * 2)
+    );
+    background-position: 0 0.75rem;
+    background-attachment: local;
+  }
+
+  /* 스크롤바 숨기기 */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* 목차 스크롤바 커스텀 */
   .toc-scrollbar {
     scrollbar-width: thin;
@@ -162,12 +185,12 @@ All colors MUST be HSL.
   /* 커스텀 스크롤바 - 파란색 */
   .custom-scrollbar-blue::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
   }
 
   .custom-scrollbar-blue::-webkit-scrollbar-track {
     background: transparent;
     margin-top: 12px;
-    margin-bottom: 12px;
   }
 
   .custom-scrollbar-blue::-webkit-scrollbar-thumb {
@@ -181,6 +204,10 @@ All colors MUST be HSL.
 
   .custom-scrollbar-blue::-webkit-scrollbar-button {
     display: none;
+  }
+
+  .custom-scrollbar-blue::-webkit-scrollbar-corner {
+    background: transparent;
   }
 
   /* Firefox 폴백 */
