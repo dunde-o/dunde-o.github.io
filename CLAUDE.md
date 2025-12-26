@@ -23,7 +23,7 @@ React + TypeScript portfolio site with Notion-powered blog, deployed to GitHub P
 **Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Router, TanStack Query, Notion API, vite-react-ssg (Static Site Generation)
 
 **Key Directories:**
-- `src/pages/` - Route components (Index, About, Blog, BlogPost, NotFound)
+- `src/pages/` - Route components (Index, About, Blog, BlogPost, BlogPreview, NotFound)
 - `src/components/` - Custom components (Navbar, ProjectCard, BlogPostCard, Quiz, QuizList, TableOfContents, etc.)
 - `src/components/ui/` - shadcn/ui components
 - `src/data/` - Static JSON data (projects.json, posts.json)
@@ -31,7 +31,7 @@ React + TypeScript portfolio site with Notion-powered blog, deployed to GitHub P
 - `src/lib/` - Utilities (notion.ts for blog data access, search.ts for blog search)
 - `scripts/` - Build-time scripts (fetch-notion.js, generate-rss.js, generate-sitemap.js)
 
-**Routing:** Configured in `src/App.tsx`. Routes: `/`, `/about`, `/blog`, `/blog/:slug`, `*` (404)
+**Routing:** Configured in `src/routes.tsx`. Routes: `/`, `/about`, `/blog`, `/blog/preview`, `/blog/:slug`, `*` (404)
 
 **Path Alias:** `@/` maps to `src/`
 
@@ -88,6 +88,28 @@ Images in blog posts support size and position control via caption prefix tags:
 - Content images are saved to `public/images/blog/{postId}/`
 - Images are only re-downloaded when the post's `updatedAt` changes
 - External URLs (non-Notion) are used as-is without downloading
+
+## Blog Preview Feature
+
+마크다운 글쓰기를 실시간으로 미리볼 수 있는 에디터 페이지 (`/blog/preview`)
+
+**접근 방법:**
+- Blog 목록 페이지 상단의 "글쓰기 프리뷰" 버튼
+- BlogPost 상세 페이지 상단의 "글쓰기 프리뷰" 버튼 (해당 글 내용으로 자동 로드)
+
+**URL 파라미터:**
+- `d` - lz-string으로 압축된 제목/내용 데이터 (`{t: title, c: content}`)
+- `from` - 원본 글의 slug (BlogPost에서 접근 시 자동 설정, "글로 돌아가기" 버튼 표시)
+
+**기능:**
+- 좌측: 마크다운 에디터 (줄 번호 표시, 스크롤 동기화)
+- 우측: 실시간 프리뷰 (광고, 퀴즈 등 특수 마커 렌더링)
+- URL 자동 업데이트 (500ms debounce)로 브라우저 새로고침해도 내용 유지
+- 최소 화면 너비 1500px 필요 (미만시 안내 메시지)
+
+**광고 표시:**
+- Preview 페이지에서는 실제 광고 대신 플레이스홀더만 표시 (`preview` prop)
+- AdPlaceholder 컴포넌트: horizontal (728x90), vertical (160x600)
 
 ## Styling
 
