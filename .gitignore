@@ -35,3 +35,6 @@ public/sitemap.xml
 
 # Generated image files
 public/images/blog/*
+
+# Temp file
+temp/*
