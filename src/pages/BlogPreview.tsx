@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Monitor } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -18,6 +18,10 @@ const BlogPreview = () => {
   const [title, setTitle] = useState("");
   const [isSupported, setIsSupported] = useState(true);
 
+  const editorRef = useRef<HTMLTextAreaElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const isScrollingRef = useRef<"editor" | "preview" | null>(null);
+
   useEffect(() => {
     document.title = "글쓰기 프리뷰 | Blog";
 
@@ -28,6 +32,30 @@ const BlogPreview = () => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  // 스크롤 동기화 핸들러
+  const syncScroll = useCallback((source: "editor" | "preview") => {
+    if (isScrollingRef.current && isScrollingRef.current !== source) return;
+
+    const editor = editorRef.current;
+    const preview = previewRef.current;
+    if (!editor || !preview) return;
+
+    isScrollingRef.current = source;
+
+    const sourceEl = source === "editor" ? editor : preview;
+    const targetEl = source === "editor" ? preview : editor;
+
+    const scrollRatio = sourceEl.scrollTop / (sourceEl.scrollHeight - sourceEl.clientHeight || 1);
+    const targetScrollTop = scrollRatio * (targetEl.scrollHeight - targetEl.clientHeight);
+
+    targetEl.scrollTop = targetScrollTop;
+
+    // 스크롤 잠금 해제 (debounce)
+    setTimeout(() => {
+      isScrollingRef.current = null;
+    }, 50);
   }, []);
 
   // 마크다운 콘텐츠 파싱 (광고, 퀴즈 등)
@@ -147,10 +175,12 @@ const BlogPreview = () => {
             />
 
             <textarea
+              ref={editorRef}
               id="preview-content"
               name="preview-content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
+              onScroll={() => syncScroll("editor")}
               placeholder="마크다운으로 내용을 작성하세요..."
               className="flex-1 w-full px-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all resize-none font-mono text-sm min-h-[600px] custom-scrollbar-blue"
             />
@@ -162,11 +192,22 @@ const BlogPreview = () => {
               <h2 className="text-lg font-semibold text-foreground">프리뷰</h2>
             </div>
 
-            <div className="flex-1 px-6 py-6 rounded-lg border border-border bg-card/30 overflow-y-auto overflow-x-hidden custom-scrollbar-cyan">
-              {title && (
+            <div
+              ref={previewRef}
+              onScroll={() => syncScroll("preview")}
+              className="flex-1 px-6 py-6 rounded-lg border border-border bg-card/30 overflow-y-auto overflow-x-hidden custom-scrollbar-cyan"
+            >
+              {title ? (
                 <>
                   <h1 className="text-4xl font-bold text-foreground mb-8">
                     {title}
+                  </h1>
+                  <hr className="border-border mb-10" />
+                </>
+              ) : (
+                <>
+                  <h1 className="text-4xl font-bold text-foreground/50 mb-8">
+                    제목을 입력하세요
                   </h1>
                   <hr className="border-border mb-10" />
                 </>
@@ -351,11 +392,10 @@ const BlogPreview = () => {
                 })}
               </div>
 
-              {!content && !title && (
-                <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-                  <p>왼쪽 에디터에 마크다운을 입력하면</p>
-                  <p>여기에 미리보기가 표시됩니다.</p>
-                </div>
+              {!content && (
+                <p className="text-muted-foreground/50 leading-relaxed">
+                  마크다운으로 내용을 작성하세요...
+                </p>
               )}
             </div>
           </div>
