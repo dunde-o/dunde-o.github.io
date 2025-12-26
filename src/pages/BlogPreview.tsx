@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Monitor } from "lucide-react";
+import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from "lz-string";
 import Navbar from "@/components/Navbar";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -14,13 +15,59 @@ import ImageWithLoader from "@/components/ImageWithLoader";
 const MIN_WIDTH = 1500;
 
 const BlogPreview = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [isSupported, setIsSupported] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const isScrollingRef = useRef<"editor" | "preview" | null>(null);
+  const updateTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // URL 파라미터에서 초기값 로드
+  useEffect(() => {
+    const dataParam = searchParams.get("d");
+    if (dataParam) {
+      try {
+        const decompressed = decompressFromEncodedURIComponent(dataParam);
+        if (decompressed) {
+          const data = JSON.parse(decompressed);
+          if (data.t) setTitle(data.t);
+          if (data.c) setContent(data.c);
+        }
+      } catch {
+        // 파싱 실패시 무시
+      }
+    }
+    setIsInitialized(true);
+  }, []);
+
+  // 제목/내용 변경시 URL 업데이트 (debounce)
+  useEffect(() => {
+    if (!isInitialized) return;
+
+    if (updateTimeoutRef.current) {
+      clearTimeout(updateTimeoutRef.current);
+    }
+
+    updateTimeoutRef.current = setTimeout(() => {
+      if (title || content) {
+        const data = JSON.stringify({ t: title, c: content });
+        const compressed = compressToEncodedURIComponent(data);
+        setSearchParams({ d: compressed }, { replace: true });
+      } else {
+        setSearchParams({}, { replace: true });
+      }
+    }, 500);
+
+    return () => {
+      if (updateTimeoutRef.current) {
+        clearTimeout(updateTimeoutRef.current);
+      }
+    };
+  }, [title, content, isInitialized, setSearchParams]);
 
   useEffect(() => {
     document.title = "글쓰기 프리뷰 | Blog";
