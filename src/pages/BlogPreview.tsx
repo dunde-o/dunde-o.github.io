@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, Monitor } from "lucide-react";
+import { ArrowLeft, Monitor, FileText } from "lucide-react";
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from "lz-string";
 import Navbar from "@/components/Navbar";
 import ReactMarkdown from "react-markdown";
@@ -26,12 +26,15 @@ const BlogPreview = () => {
   const proseRef = useRef<HTMLDivElement>(null);
   const isScrollingRef = useRef<"editor" | "preview" | null>(null);
   const updateTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const initialFromRef = useRef<string | null>(null);
+  const isFirstUpdateRef = useRef(true);
 
   // 줄 번호 배열 생성
   const lines = useMemo(() => content.split("\n"), [content]);
 
   // URL 파라미터에서 초기값 로드
   useEffect(() => {
+    initialFromRef.current = searchParams.get("from");
     const dataParam = searchParams.get("d");
     if (dataParam) {
       try {
@@ -52,17 +55,28 @@ const BlogPreview = () => {
   useEffect(() => {
     if (!isInitialized) return;
 
+    // 초기 로드 후 첫 번째 업데이트는 스킵 (URL에서 읽은 값으로 인한 불필요한 재작성 방지)
+    if (isFirstUpdateRef.current) {
+      isFirstUpdateRef.current = false;
+      return;
+    }
+
     if (updateTimeoutRef.current) {
       clearTimeout(updateTimeoutRef.current);
     }
 
     updateTimeoutRef.current = setTimeout(() => {
+      const fromParam = initialFromRef.current;
       if (title || content) {
         const data = JSON.stringify({ t: title, c: content });
         const compressed = compressToEncodedURIComponent(data);
-        setSearchParams({ d: compressed }, { replace: true });
+        const newParams: Record<string, string> = { d: compressed };
+        if (fromParam) newParams.from = fromParam;
+        setSearchParams(newParams, { replace: true });
       } else {
-        setSearchParams({}, { replace: true });
+        const newParams: Record<string, string> = {};
+        if (fromParam) newParams.from = fromParam;
+        setSearchParams(newParams, { replace: true });
       }
     }, 500);
 
@@ -214,13 +228,23 @@ const BlogPreview = () => {
           {/* 에디터 영역 */}
           <div className="w-1/2 flex flex-col min-h-0">
             <div className="flex items-center justify-between mb-4">
-              <Link
-                to="/blog"
-                className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                블로그로 돌아가기
-              </Link>
+              {initialFromRef.current ? (
+                <Link
+                  to={`/blog/${initialFromRef.current}`}
+                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <FileText className="w-4 h-4" />
+                  글로 돌아가기
+                </Link>
+              ) : (
+                <Link
+                  to="/blog"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  블로그로 돌아가기
+                </Link>
+              )}
               <h2 className="text-lg font-semibold text-foreground">에디터</h2>
             </div>
 
