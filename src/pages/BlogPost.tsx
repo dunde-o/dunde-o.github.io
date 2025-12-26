@@ -317,18 +317,22 @@ const BlogPost = () => {
                   components={{
                     code({ className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || "");
-                      const isInline = !match;
-                      return isInline ? (
+                      const codeString = String(children).replace(/\n$/, "");
+                      // 언어가 지정되었거나, 여러 줄이면 코드 블록으로 처리
+                      const isBlock = match || codeString.includes("\n");
+                      const language = match ? match[1] : "text";
+
+                      return isBlock ? (
+                        <CodeBlock language={language}>
+                          {codeString}
+                        </CodeBlock>
+                      ) : (
                         <code
                           className="bg-muted px-1.5 py-0.5 rounded text-sm"
                           {...props}
                         >
                           {children}
                         </code>
-                      ) : (
-                        <CodeBlock language={match[1]}>
-                          {String(children).replace(/\n$/, "")}
-                        </CodeBlock>
                       );
                     },
                     h1: ({ children }) => (
