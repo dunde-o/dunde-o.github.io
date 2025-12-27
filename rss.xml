@@ -5,8 +5,21 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Dec 2025 13:56:48 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 27 Dec 2025 07:27:11 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>[ADP] 1. 데이터의 이해 문제풀이</title>
+      <link>https://www.dunde.kr/blog/2d6ca0f9b5ae8083957be8574ffe6ced</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d6ca0f9b5ae8083957be8574ffe6ced</guid>
+      <pubDate>Sat, 27 Dec 2025 07:20:00 GMT</pubDate>
+      <description>ADP 1과목 데이터의 이해 퀴즈 객관식 문제 ❔{&quot;items&quot;:[
+{&quot;question&quot;:&quot;데이터 형태에 따른 분류에서 정성적(Qualitative) 데이터에 해당하는 것은?&quot;,&quot;options&quot;:[&quot;풍속&quot;,&quot;습도 수치&quot;,&quot;일기예보 특보 메시지&quot;,&quot;시간당 강우량&quot;],&quot;answer&quot;:3,&quot;explanation&quot;:&quot;정성적 데이터는 비정형/주관적 데이터입니다. 일기예보 특보 메시지는 텍스트 형태의 정성적 데이터이며, 풍속/습도/강우량은 수치화된 정량적 데이터입니다.&quot;},
+{&quot;question&quot;:&quot;노나카의 지식 변환 모델에서 암묵지와 형식지의</description>
+      <category>자격증</category>
+      <category>공부</category>
+      <category>ADP</category>
+      <category>Quiz</category>
+    </item>
     <item>
       <title>[ADP] 최신 빅데이터 상식</title>
       <link>https://www.dunde.kr/blog/2d5ca0f9b5ae805bb82fca6509338937</link>
