@@ -5,8 +5,29 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Dec 2025 07:27:11 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 28 Dec 2025 10:05:15 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Electron + React로 1000대 드론을 실시간 제어하는 관제 시스템 만들기</title>
+      <link>https://www.dunde.kr/blog/2d7ca0f9b5ae802fb528f799c7910a33</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d7ca0f9b5ae802fb528f799c7910a33</guid>
+      <pubDate>Sun, 28 Dec 2025 08:09:00 GMT</pubDate>
+      <description>Electron + React로 1000대 드론을 실시간 제어하는 관제 시스템 만들기 Google Maps 위에서 수백천 대의 드론을 실시간으로 시각화하고 제어하는 데스크톱 애플리케이션을 개발한 과정을 공유합니다. 특히 대량의 마커를 렌더링할 때 발생하는 성능 문제를 어떻게 해결했는지에 초점을 맞춰 설명합니다. --
+프로젝트 개요 기술 스택 프레임워크: Electron + React 19 + TypeScript
+상태관리: React Query v5 + WebSocket Context
+지도: Google Maps API (@vis.g</description>
+      <category>개발</category>
+      <category>React</category>
+      <category>Electron</category>
+      <category>TypeScript</category>
+      <category>Google Maps</category>
+      <category>WebSocket</category>
+      <category>성능 최적화</category>
+      <category>클러스터링</category>
+      <category>React Query</category>
+      <category>실시간</category>
+      <category>드론</category>
+    </item>
     <item>
       <title>[ADP] 1. 데이터의 이해 문제풀이</title>
       <link>https://www.dunde.kr/blog/2d6ca0f9b5ae8083957be8574ffe6ced</link>
