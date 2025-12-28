@@ -52,11 +52,11 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
               ))}
             </div>
 
-            <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+            <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2 break-keep">
               {post.title}
             </h2>
 
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2 break-keep">
               {post.description || (
                 <>
                   {post.content.slice(0, 150).replace(/[#*`>\-]/g, "").trim()}
