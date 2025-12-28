@@ -1,5 +1,11 @@
 [
   {
+    "title": "드론 컨트롤 시스템",
+    "description": "Electron + React 기반 1000대 드론 실시간 관제 시스템. WebSocket으로 드론 상태를 실시간 모니터링하고 명령을 전송하는 데스크톱 애플리케이션입니다.",
+    "tags": ["Electron", "React", "TypeScript", "WebSocket"],
+    "link": "/blog/2d7ca0f9b5ae802fb528f799c7910a33"
+  },
+  {
     "title": "Notion Blog",
     "description": "Notion을 CMS로 활용한 정적 블로그. 빌드 시 Notion API로 포스트를 가져와 마크다운으로 변환하고, RSS/Sitemap을 자동 생성하여 SEO를 최적화했습니다.",
     "tags": ["React", "TypeScript", "Notion API", "Vite"],
