@@ -5,7 +5,7 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Dec 2025 10:05:15 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 28 Dec 2025 10:09:25 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Electron + React로 1000대 드론을 실시간 제어하는 관제 시스템 만들기</title>
