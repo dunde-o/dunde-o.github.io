@@ -5,8 +5,22 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 29 Dec 2025 05:50:55 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 29 Dec 2025 12:53:06 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>React Server Components (RSC) 이해하기</title>
+      <link>https://www.dunde.kr/blog/2d8ca0f9b5ae8092aa29e02cc8d0535b</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d8ca0f9b5ae8092aa29e02cc8d0535b</guid>
+      <pubDate>Mon, 29 Dec 2025 12:39:00 GMT</pubDate>
+      <description>React Server Components (RSC) 이해하기 React Server Components(RSC)는 React 18에서 도입되고 React 19에서 정식 안정화된 새로운 아키텍처입니다. 기존의 클라이언트 사이드 렌더링(CSR)이나 서버 사이드 렌더링(SSR)과는 완전히 다른 패러다임으로, React 생태계의 가장 큰 변화 중 하나입니다. 왜 Server Components가 필요한가? 기존 React 앱의 문제점을 먼저 살펴봅시다. 기존 CSR의 한계 1. 번들 크기 증가: 모든 컴포넌트 코드가 클라이언트로 전송됨
+</description>
+      <category>Frontend</category>
+      <category>React</category>
+      <category>Next.js</category>
+      <category>RSC</category>
+      <category>Server Components</category>
+      <category>SSR</category>
+    </item>
     <item>
       <title>Electron + React로 1000대 드론을 실시간 제어하는 관제 시스템 만들기</title>
       <link>https://www.dunde.kr/blog/2d7ca0f9b5ae802fb528f799c7910a33</link>
