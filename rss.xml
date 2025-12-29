@@ -5,8 +5,22 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 29 Dec 2025 13:02:01 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 29 Dec 2025 13:23:53 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>React Suspense와 Concurrent 렌더링 이해하기</title>
+      <link>https://www.dunde.kr/blog/2d8ca0f9b5ae804aa79cca480ee96e82</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2d8ca0f9b5ae804aa79cca480ee96e82</guid>
+      <pubDate>Mon, 29 Dec 2025 13:21:00 GMT</pubDate>
+      <description>React Suspense와 Concurrent 렌더링 이해하기 React 18에서 도입된 Concurrent 렌더링은 React의 근본적인 렌더링 방식을 바꾸는 패러다임 전환입니다. 이 글에서는 Suspense의 내부 동작 원리부터 useTransition, useDeferredValue, 그리고 React 19의 use 훅까지 깊이 있게 살펴봅니다. Suspense란? Suspense는 컴포넌트가 렌더링되기 전에 &quot;무언가를 기다릴 수 있게&quot; 해주는 React의 기능입니다. 가장 쉽게 말하면, 데이터나 코드가 준비될 때까지 로딩 </description>
+      <category>React</category>
+      <category>React</category>
+      <category>Suspense</category>
+      <category>useTransition</category>
+      <category>useDeferredValue</category>
+      <category>use</category>
+      <category>Concurrent Rendering</category>
+    </item>
     <item>
       <title>React Server Components (RSC) 이해하기</title>
       <link>https://www.dunde.kr/blog/2d8ca0f9b5ae8092aa29e02cc8d0535b</link>
