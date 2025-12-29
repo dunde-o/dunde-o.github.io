@@ -17,11 +17,11 @@ const ImageWithLoader = ({
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className={`relative ${containerClassName}`}>
+    <span className={`relative inline-block ${containerClassName}`}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/50 rounded-lg">
+        <span className="absolute inset-0 flex items-center justify-center bg-muted/50 rounded-lg">
           <Loader2 className="w-8 h-8 text-primary animate-spin" />
-        </div>
+        </span>
       )}
       <img
         src={src}
@@ -30,7 +30,7 @@ const ImageWithLoader = ({
         onLoad={() => setIsLoading(false)}
         onError={() => setIsLoading(false)}
       />
-    </div>
+    </span>
   );
 };
 

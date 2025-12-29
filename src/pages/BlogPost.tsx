@@ -457,21 +457,21 @@ const BlogPost = () => {
                         : "justify-center";
 
                       return (
-                        <figure className="my-6">
-                          <div className={`flex ${alignClass}`}>
+                        <span className="block my-6">
+                          <span className={`flex ${alignClass}`}>
                             <ImageWithLoader
                               src={src || ""}
                               alt={cleanAlt}
                               className="rounded-lg"
                               containerClassName={sizeClass}
                             />
-                          </div>
+                          </span>
                           {cleanAlt && cleanAlt !== "image" && (
-                            <figcaption className="text-center text-sm text-muted-foreground mt-2">
+                            <span className="block text-center text-sm text-muted-foreground mt-2">
                               {cleanAlt}
-                            </figcaption>
+                            </span>
                           )}
-                        </figure>
+                        </span>
                       );
                     },
                   }}
