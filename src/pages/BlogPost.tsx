@@ -217,7 +217,8 @@ const BlogPost = () => {
                   src={post.coverImage}
                   alt={post.title}
                   className="w-full h-64 md:h-96 object-cover"
-                  containerClassName="h-64 md:h-96"
+                  containerClassName="w-full h-64 md:h-96"
+                  block
                 />
               </div>
             </div>
