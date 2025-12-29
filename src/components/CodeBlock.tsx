@@ -16,6 +16,14 @@ const StyledCodeBlock = ({ language, children }: Props) => {
       language={language}
       PreTag="div"
       className="rounded-lg !my-6"
+      customStyle={{
+        fontFamily: "'D2Coding', monospace",
+      }}
+      codeTagProps={{
+        style: {
+          fontFamily: "'D2Coding', monospace",
+        },
+      }}
     >
       {children}
     </CodeBlock>

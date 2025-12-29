@@ -339,6 +339,7 @@ const BlogPost = () => {
                       ) : (
                         <code
                           className="bg-muted px-1.5 py-0.5 rounded text-sm"
+                          style={{ fontFamily: "'D2Coding', monospace" }}
                           {...props}
                         >
                           {children}

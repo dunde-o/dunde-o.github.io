@@ -423,7 +423,7 @@ const BlogPreview = () => {
                           }
 
                           return (
-                            <code className="px-1.5 py-0.5 rounded bg-muted text-primary text-sm">
+                            <code className="px-1.5 py-0.5 rounded bg-muted text-primary text-sm" style={{ fontFamily: "'D2Coding', monospace" }}>
                               {children}
                             </code>
                           );
