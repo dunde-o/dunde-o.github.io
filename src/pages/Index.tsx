@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
@@ -12,7 +13,11 @@ declare global {
 
 const isDev = import.meta.env.DEV;
 
+// TODO: 광고 임시 비활성화
 const AdCard = () => {
+  return null;
+
+  /*
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
   const adRef = useRef<HTMLModElement>(null);
@@ -68,7 +73,6 @@ const AdCard = () => {
     >
       <Card className="group relative overflow-hidden bg-card border-border hover:border-primary/50 transition-colors duration-300 hover:shadow-lg hover:shadow-primary/10 h-full">
         <div className="flex flex-col items-center justify-center h-full min-h-[200px] p-6 relative">
-          {/* 배경 플레이스홀더 - 항상 표시 */}
           <div className="absolute inset-6 flex items-center justify-center bg-white rounded-lg">
             <img
               src="/images/google_ads_logo_icon.png"
@@ -76,7 +80,6 @@ const AdCard = () => {
               className="h-12 object-contain opacity-50"
             />
           </div>
-          {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
           {!isDev && (
             <ins
               ref={adRef}
@@ -90,10 +93,8 @@ const AdCard = () => {
           )}
         </div>
 
-        {/* 기존 그라데이션 효과 */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-        {/* 반사광 효과 - 일자 광원 */}
         <div
           ref={shineRef}
           className="absolute inset-0 pointer-events-none opacity-0"
@@ -101,6 +102,7 @@ const AdCard = () => {
       </Card>
     </div>
   );
+  */
 };
 
 const Index = () => {

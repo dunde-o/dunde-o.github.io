@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef } from "react";
 
 interface AdPlaceholderProps {
@@ -17,7 +18,12 @@ declare global {
 
 const isDev = import.meta.env.DEV;
 
-const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
+const AdPlaceholder = (_props: AdPlaceholderProps) => {
+  // TODO: 광고 임시 비활성화
+  return null;
+
+  /*
+  const { type, preview = false } = _props;
   const adRef = useRef<HTMLModElement>(null);
   const isAdLoaded = useRef(false);
 
@@ -40,7 +46,6 @@ const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
   if (type === "horizontal") {
     return (
       <div className="w-[728px] h-[90px] mx-auto mb-8 flex items-center justify-center relative">
-        {/* 배경 플레이스홀더 - 항상 표시 */}
         <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
           <img
             src="/images/google_ads_logo_icon.png"
@@ -48,7 +53,6 @@ const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
             className="h-12 object-contain opacity-50"
           />
         </div>
-        {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
         {!isDev && !preview && (
           <ins
             ref={adRef}
@@ -66,7 +70,6 @@ const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
 
   return (
     <div className="w-[160px] h-[600px] flex items-center justify-center relative">
-      {/* 배경 플레이스홀더 - 항상 표시 */}
       <div className="absolute inset-0 flex items-center justify-center bg-white rounded-lg">
         <img
           src="/images/google_ads_logo_icon.png"
@@ -74,7 +77,6 @@ const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
           className="h-12 object-contain opacity-50"
         />
       </div>
-      {/* 광고 - 로드되면 플레이스홀더 위에 표시 */}
       {!isDev && !preview && (
         <ins
           ref={adRef}
@@ -88,6 +90,7 @@ const AdPlaceholder = ({ type, preview = false }: AdPlaceholderProps) => {
       )}
     </div>
   );
+  */
 };
 
 export default AdPlaceholder;
