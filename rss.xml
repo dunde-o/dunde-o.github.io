@@ -5,8 +5,44 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 29 Dec 2025 13:49:48 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Jan 2026 08:35:15 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>DQN(Deep Q-Network): 딥러닝과 강화학습의 결합</title>
+      <link>https://www.dunde.kr/blog/2dbca0f9b5ae803aa6f7c4aa9f0f4001</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2dbca0f9b5ae803aa6f7c4aa9f0f4001</guid>
+      <pubDate>Thu, 01 Jan 2026 08:22:00 GMT</pubDate>
+      <description>DQN(Deep Q-Network): 딥러닝과 강화학습의 결합 2013년 DeepMind가 발표한 DQN(Deep Q-Network) 은 딥러닝과 강화학습을 결합하여 아타리 게임에서 인간 수준의 성능을 달성했습니다. 이 글에서는 DQN의 핵심 개념과 구현 방법을 살펴봅니다. --
+1. Q-Learning 복습 Q-Value란? Q-Value (Action-Value) 는 상태 에서 행동 를 취했을 때 얻을 수 있는 미래 보상의 기대값입니다. $$Q(s, a) = \mathbb{E}[rt + \gamma r{t+1} + \gamma^</description>
+      <category>AI/강화학습</category>
+      <category>DQN</category>
+      <category>Deep Q-Network</category>
+      <category>강화학습</category>
+      <category>딥러닝</category>
+      <category>DeepMind</category>
+      <category>Experience Replay</category>
+      <category>Target Network</category>
+      <category>PyTorch</category>
+    </item>
+    <item>
+      <title>강화학습(Reinforcement Learning) 기초 개념 정리</title>
+      <link>https://www.dunde.kr/blog/2dbca0f9b5ae80f7a63dc261949bdfae</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2dbca0f9b5ae80f7a63dc261949bdfae</guid>
+      <pubDate>Thu, 01 Jan 2026 07:04:00 GMT</pubDate>
+      <description>강화학습(Reinforcement Learning) 기초 개념 정리 인공지능의 세 가지 주요 학습 방법 중 하나인 강화학습(Reinforcement Learning, RL) 은 AlphaGo, ChatGPT, 자율주행 등 현대 AI의 핵심 기술입니다. 이 글에서는 강화학습의 기본 개념부터 핵심 알고리즘의 분류까지, AI 입문자도 이해할 수 있도록 상세히 설명합니다. --
+1. 강화학습이란? 세 가지 학습 패러다임 | 학습 방법 | 데이터 | 목표 | 예시 |
+|-----------|--------|------|------|
+| 지도</description>
+      <category>AI/강화학습</category>
+      <category>강화학습</category>
+      <category>Reinforcement Learning</category>
+      <category>MDP</category>
+      <category>Q-Learning</category>
+      <category>SARSA</category>
+      <category>벨만 방정식</category>
+      <category>AI</category>
+      <category>머신러닝</category>
+    </item>
     <item>
       <title>React Suspense와 Concurrent 렌더링 이해하기</title>
       <link>https://www.dunde.kr/blog/2d8ca0f9b5ae804aa79cca480ee96e82</link>
