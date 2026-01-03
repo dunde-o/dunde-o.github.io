@@ -5,8 +5,99 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 01 Jan 2026 08:35:15 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 03 Jan 2026 04:36:26 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>MuZero: 규칙 없이 배우는 AI</title>
+      <link>https://www.dunde.kr/blog/2ddca0f9b5ae809ea4c8f855f97d78a8</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ddca0f9b5ae809ea4c8f855f97d78a8</guid>
+      <pubDate>Sat, 03 Jan 2026 04:29:00 GMT</pubDate>
+      <description>MuZero: 규칙 없이 배우는 AI MuZero는 DeepMind가 2019년에 발표한 알고리즘으로, AlphaZero를 넘어 게임 규칙조차 알려주지 않아도 스스로 환경 모델을 학습하고 계획합니다. 바둑, 체스뿐 아니라 아타리 게임 57종에서도 최고 성능을 달성했습니다. --
+1. AlphaZero의 한계 AlphaZero는 게임 규칙을 알아야 합니다:
+어떤 수가 합법적인지
+수를 두면 보드가 어떻게 변하는지
+게임이 언제 끝나는지 이 정보가 없으면 MCTS를 수행할 수 없습니다. 실제 문제에서의 한계 로봇 제어: 물리 법칙을 정확히</description>
+      <category>AI/강화학습</category>
+      <category>MuZero</category>
+      <category>DeepMind</category>
+      <category>Model-Based RL</category>
+      <category>AlphaZero</category>
+      <category>강화학습</category>
+      <category>World Model</category>
+      <category>게임 AI</category>
+    </item>
+    <item>
+      <title>MCTS, AlphaGo, AlphaZero: 게임 AI의 혁명</title>
+      <link>https://www.dunde.kr/blog/2ddca0f9b5ae802791e4c43ef104a00d</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ddca0f9b5ae802791e4c43ef104a00d</guid>
+      <pubDate>Sat, 03 Jan 2026 04:22:00 GMT</pubDate>
+      <description>MCTS, AlphaGo, AlphaZero: 게임 AI의 혁명 MCTS (Monte Carlo Tree Search) 는 체스, 바둑 같은 게임에서 최적의 수를 찾는 탐색 알고리즘입니다. DeepMind는 MCTS와 딥러닝을 결합하여 AlphaGo, AlphaZero를 만들어 인간 최고수를 꺾었습니다. 이 글에서는 MCTS의 원리와 AlphaGo/AlphaZero의 작동 방식을 살펴봅니다. --
+1. 게임 트리 탐색의 기초 Minimax 알고리즘 게임 AI의 고전적 방법: Minimax의 한계 복잡도: 체스는 매 턴 35개 선택지</description>
+      <category>AI/강화학습</category>
+      <category>MCTS</category>
+      <category>AlphaGo</category>
+      <category>AlphaZero</category>
+      <category>바둑</category>
+      <category>DeepMind</category>
+      <category>게임 AI</category>
+      <category>강화학습</category>
+      <category>Self-Play</category>
+    </item>
+    <item>
+      <title>PPO (Proximal Policy Optimization)</title>
+      <link>https://www.dunde.kr/blog/2ddca0f9b5ae80278a7aee0bf7c07a2d</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ddca0f9b5ae80278a7aee0bf7c07a2d</guid>
+      <pubDate>Sat, 03 Jan 2026 04:15:00 GMT</pubDate>
+      <description>PPO (Proximal Policy Optimization) PPO는 OpenAI가 2017년에 발표한 Policy Gradient 알고리즘으로, 구현이 간단하면서도 높은 성능을 보여 현재 가장 널리 사용되는 강화학습 알고리즘 중 하나입니다. ChatGPT의 RLHF 학습에도 PPO가 사용되었습니다. --
+1. PPO가 해결하는 문제 Policy Gradient의 문제점 기본 Policy Gradient (REINFORCE, A2C)는 학습이 불안정합니다: 스텝 크기가 너무 크면: 정책이 급격히 변해서 성능이 붕괴
+스텝 크기가 너</description>
+      <category>AI/강화학습</category>
+      <category>PPO</category>
+      <category>Proximal Policy Optimization</category>
+      <category>OpenAI</category>
+      <category>TRPO</category>
+      <category>RLHF</category>
+      <category>ChatGPT</category>
+      <category>강화학습</category>
+    </item>
+    <item>
+      <title>Policy Gradient와 Actor-Critic</title>
+      <link>https://www.dunde.kr/blog/2ddca0f9b5ae8076a984f5a9d900664c</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ddca0f9b5ae8076a984f5a9d900664c</guid>
+      <pubDate>Sat, 03 Jan 2026 04:03:00 GMT</pubDate>
+      <description>Policy Gradient와 Actor-Critic DQN 계열 알고리즘은 가치 함수를 학습하여 간접적으로 정책을 도출합니다. 반면 Policy Gradient는 정책을 직접 학습합니다. 이 글에서는 Policy Gradient의 원리와 이를 개선한 Actor-Critic 방법을 다룹니다. --
+1. Value-Based vs Policy-Based Value-Based (DQN 계열) 이산 행동 공간에 적합
+결정론적 정책 Policy-Based 연속 행동 공간 가능
+확률적 정책 (탐험 내장)
+고차원 행동 공간 처리 가능 언제 P</description>
+      <category>AI/강화학습</category>
+      <category>Policy Gradient</category>
+      <category>Actor-Critic</category>
+      <category>Reinforcement Learning</category>
+      <category>A2C</category>
+      <category>A3C</category>
+      <category>GAE</category>
+      <category>강화학습</category>
+    </item>
+    <item>
+      <title>DQN 변형 알고리즘: Double DQN부터 Rainbow까지</title>
+      <link>https://www.dunde.kr/blog/2dbca0f9b5ae80e491bbf1a9b6862038</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2dbca0f9b5ae80e491bbf1a9b6862038</guid>
+      <pubDate>Thu, 01 Jan 2026 08:47:00 GMT</pubDate>
+      <description>DQN 변형 알고리즘: Double DQN부터 Rainbow까지 기본 DQN이 혁신적이었지만, 여러 한계점이 있었습니다. 연구자들은 이를 개선하기 위해 다양한 변형 알고리즘을 제안했고, 결국 모든 개선점을 통합한 Rainbow가 탄생했습니다. 이 글에서는 각 변형의 핵심 아이디어와 구현 방법을 상세히 살펴봅니다. --
+1. DQN의 한계점 기본 DQN을 사용하다 보면 다음과 같은 문제를 마주하게 됩니다: | 문제 | 설명 | 해결책 |
+|------|------|--------|
+| Q값 과대평가 | max 연산이 노이즈를 증폭시켜</description>
+      <category>AI/강화학습</category>
+      <category>DQN</category>
+      <category>Double DQN</category>
+      <category>Dueling DQN</category>
+      <category>PER</category>
+      <category>Rainbow</category>
+      <category>C51</category>
+      <category>Noisy Networks</category>
+      <category>강화학습</category>
+    </item>
     <item>
       <title>DQN(Deep Q-Network): 딥러닝과 강화학습의 결합</title>
       <link>https://www.dunde.kr/blog/2dbca0f9b5ae803aa6f7c4aa9f0f4001</link>
