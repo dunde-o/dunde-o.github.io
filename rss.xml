@@ -5,8 +5,45 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 03 Jan 2026 04:40:06 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 03 Jan 2026 05:40:29 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>2025년 강화학습 트렌드와 최신 기술</title>
+      <link>https://www.dunde.kr/blog/2ddca0f9b5ae8097b9d9ee68093bd3b8</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ddca0f9b5ae8097b9d9ee68093bd3b8</guid>
+      <pubDate>Sat, 03 Jan 2026 05:35:00 GMT</pubDate>
+      <description>2025년 강화학습 트렌드와 최신 기술 2024년 강화학습의 선구자인 Richard Sutton과 David Silver가 튜링상을 수상했습니다. 2025년 현재, 강화학습은 LLM 추론, 로보틱스, 멀티모달 AI 등 다양한 분야에서 핵심 기술로 자리잡았습니다. 이 글에서는 최신 연구 동향과 새로운 알고리즘들을 살펴봅니다. --
+1. 강화학습 시장 현황 강화학습은 AI 분야에서 빠르게 성장하는 영역으로, 게임, 로보틱스, LLM 정렬 등 다양한 산업에서 활용이 확대되고 있습니다. 주요 적용 분야 | 분야 | 적용 예시 | 주요 기업</description>
+      <category>AI/강화학습</category>
+      <category>강화학습</category>
+      <category>DeepSeek-R1</category>
+      <category>Decision Transformer</category>
+      <category>RLVR</category>
+      <category>World Models</category>
+      <category>VLA</category>
+      <category>Offline RL</category>
+    </item>
+    <item>
+      <title>RLHF: 인간 피드백으로 LLM 정렬하기</title>
+      <link>https://www.dunde.kr/blog/2ddca0f9b5ae80b88483cbae380ec382</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ddca0f9b5ae80b88483cbae380ec382</guid>
+      <pubDate>Sat, 03 Jan 2026 05:30:00 GMT</pubDate>
+      <description>RLHF: 인간 피드백으로 LLM 정렬하기 RLHF (Reinforcement Learning from Human Feedback) 는 대규모 언어 모델(LLM)을 인간의 의도와 선호에 맞게 정렬하는 학습 방법입니다. ChatGPT, Claude 등 현대 AI 어시스턴트의 핵심 기술입니다. --
+1. LLM 정렬 문제 사전 학습된 LLM의 한계 대규모 텍스트로 학습한 LLM은:
+유해하거나 편향된 콘텐츠 생성 가능
+질문에 직접 답하기보다 텍스트 완성 경향
+거짓 정보를 자신 있게 생성 (hallucination)
+인간의 의도를 이해하지</description>
+      <category>AI/강화학습</category>
+      <category>RLHF</category>
+      <category>LLM</category>
+      <category>ChatGPT</category>
+      <category>DPO</category>
+      <category>GRPO</category>
+      <category>강화학습</category>
+      <category>AI 정렬</category>
+      <category>Reward Model</category>
+    </item>
     <item>
       <title>MuZero: 규칙 없이 배우는 AI</title>
       <link>https://www.dunde.kr/blog/2ddca0f9b5ae809ea4c8f855f97d78a8</link>
