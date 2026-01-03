@@ -12,7 +12,10 @@ import posts from "@/data/posts.json";
 import type { BlogPost as BlogPostType } from "@/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import { ChevronLeft, ChevronRight, Edit3 } from "lucide-react";
 import LZString from "lz-string";
 
@@ -323,8 +326,8 @@ const BlogPost = () => {
               return (
                 <ReactMarkdown
                   key={index}
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeRaw, rehypeKatex]}
                   components={{
                     code({ className, children, ...props }) {
                       const match = /language-(\w+)/.exec(className || "");

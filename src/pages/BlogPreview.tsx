@@ -5,7 +5,10 @@ import LZString from "lz-string";
 import Navbar from "@/components/Navbar";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import CodeBlock from "@/components/CodeBlock";
 import Quiz from "@/components/Quiz";
 import QuizList from "@/components/QuizList";
@@ -356,8 +359,8 @@ const BlogPreview = () => {
                   return (
                     <ReactMarkdown
                       key={index}
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeRaw]}
+                      remarkPlugins={[remarkGfm, remarkMath]}
+                      rehypePlugins={[rehypeRaw, rehypeKatex]}
                       components={{
                         h1: ({ children }) => (
                           <h1 className="text-3xl font-bold mt-12 mb-4 text-foreground">

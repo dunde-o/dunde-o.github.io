@@ -292,4 +292,38 @@ All colors MUST be HSL.
       --rainbow-angle: 360deg;
     }
   }
+
+  /* KaTeX 수식 스타일 커스터마이징 */
+  .katex {
+    font-size: 1.1em;
+  }
+
+  .katex-display {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+  }
+
+  .katex-display > .katex {
+    text-align: center;
+  }
+
+  /* 다크 테마에서 수식 색상 */
+  .katex .base {
+    color: hsl(var(--foreground));
+  }
+
+  /* 블록 수식 배경 */
+  .katex-display {
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  /* 인라인 수식 스타일 */
+  p .katex,
+  li .katex {
+    padding: 0 0.15em;
+  }
 }
