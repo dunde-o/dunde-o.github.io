@@ -5,8 +5,30 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 03 Jan 2026 05:51:17 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 07 Jan 2026 15:04:18 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>드론 경로 자동 생성 알고리즘 - Coverage Path Planning (Boustrophedon 패턴)</title>
+      <link>https://www.dunde.kr/blog/2e1ca0f9b5ae80d19b88ef214921052b</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e1ca0f9b5ae80d19b88ef214921052b</guid>
+      <pubDate>Wed, 07 Jan 2026 14:43:00 GMT</pubDate>
+      <description>Coverage Path Planning (Boustrophedon 패턴) 알고리즘 농업용 드론의 자율 비행 경로를 생성하는 Coverage Path Planning 알고리즘에 대해 설명합니다. 개요 Coverage Path Planning (CPP) 은 로봇이나 드론이 주어진 영역을 빠짐없이 커버하는 경로를 생성하는 알고리즘입니다. 농업용 드론에서는 다음과 같은 용도로 사용됩니다: 농약/비료 살포
+작물 모니터링
+항공 촬영 Boustrophedon 패턴이란? &quot;Boustrophedon&quot;은 그리스어로 &quot;소가 밭을 가는 방식&quot;을 의미합</description>
+      <category>알고리즘</category>
+      <category>Coverage Path Planning</category>
+      <category>Boustrophedon</category>
+      <category>드론</category>
+      <category>UAV</category>
+      <category>경로 계획</category>
+      <category>농업용 드론</category>
+      <category>자율비행</category>
+      <category>기하학 알고리즘</category>
+      <category>TypeScript</category>
+      <category>좌표 변환</category>
+      <category>WGS84</category>
+      <category>폴리곤 처리</category>
+    </item>
     <item>
       <title>2025년 강화학습 트렌드와 최신 기술</title>
       <link>https://www.dunde.kr/blog/2ddca0f9b5ae8097b9d9ee68093bd3b8</link>
