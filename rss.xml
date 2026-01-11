@@ -5,8 +5,17 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 07 Jan 2026 15:04:18 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jan 2026 05:54:21 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Untitled</title>
+      <link>https://www.dunde.kr/blog/2e5ca0f9b5ae805cbccfd59dc9b65756</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae805cbccfd59dc9b65756</guid>
+      <pubDate>Sun, 11 Jan 2026 05:30:00 GMT</pubDate>
+      <description></description>
+      
+      
+    </item>
     <item>
       <title>드론 경로 자동 생성 알고리즘 - Coverage Path Planning (Boustrophedon 패턴)</title>
       <link>https://www.dunde.kr/blog/2e1ca0f9b5ae80d19b88ef214921052b</link>
