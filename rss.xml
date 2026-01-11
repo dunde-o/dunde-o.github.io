@@ -5,8 +5,38 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 11 Jan 2026 08:58:42 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jan 2026 10:41:32 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>IR 자료 작성법: 투자자를 설득하는 피치덱의 핵심</title>
+      <link>https://www.dunde.kr/blog/2e5ca0f9b5ae80e4abe0df8e8215053f</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae80e4abe0df8e8215053f</guid>
+      <pubDate>Sun, 11 Jan 2026 10:28:00 GMT</pubDate>
+      <description>IR 자료, 왜 중요한가? 투자자를 만나면 가장 먼저 요청받는 게 IR 자료다. IR(Investor Relations)은 투자자와의 소통을 위한 모든 활동을 의미하고, IR 자료는 그 핵심인 발표 자료다. 좋은 아이템이 있어도 IR 자료가 부실하면 검토조차 받지 못한다. 반대로 IR 자료가 잘 구성되어 있으면 투자자의 관심을 끌고, 미팅 기회를 얻을 수 있다. --
+IR 자료 vs 피치덱 용어가 헷갈릴 수 있는데, 실무에서는 비슷하게 쓰인다. | 구분 | 피치덱 (Pitch Deck) | IR 자료 (Investor Deck) |</description>
+      <category>비즈니스</category>
+      <category>벤처투자</category>
+      <category>스타트업</category>
+      <category>IR</category>
+      <category>피치덱</category>
+      <category>투자유치</category>
+    </item>
+    <item>
+      <title>초기 스타트업 가치 평가: 투자자는 무엇을 보는가</title>
+      <link>https://www.dunde.kr/blog/2e5ca0f9b5ae808ab743c6a3331c3842</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae808ab743c6a3331c3842</guid>
+      <pubDate>Sun, 11 Jan 2026 10:11:00 GMT</pubDate>
+      <description>초기 기업의 가치, 어떻게 평가할까? 상장 기업은 주가로 가치를 알 수 있다. 매출, 영업이익, PER 같은 지표로 비교도 가능하다. 그런데 초기 스타트업은 다르다. 매출이 없거나 적자인 경우가 대부분이고, 비교할 수 있는 데이터도 부족하다. 그래서 투자자들은 독특한 방식으로 기업 가치를 평가한다. --
+투자 유치, 무엇이 중요한가? 투자자가 스타트업을 볼 때 고려하는 요소는 크게 네 가지다. 투자 Stage: 시드인지, 시리즈A인지에 따라 보는 관점이 다름
+하우스: 어떤 VC인지에 따라 투자 성향이 다름
+펀드: 같은 VC라도 펀드</description>
+      <category>비즈니스</category>
+      <category>벤처투자</category>
+      <category>스타트업</category>
+      <category>밸류에이션</category>
+      <category>RCPS</category>
+      <category>투자심사</category>
+    </item>
     <item>
       <title>모태펀드 완전 정복: 정부 자금이 스타트업에 닿는 과정</title>
       <link>https://www.dunde.kr/blog/2e5ca0f9b5ae804d821fc832da8729a1</link>
