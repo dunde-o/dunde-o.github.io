@@ -10,6 +10,7 @@ import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import CodeBlock from "@/components/CodeBlock";
+import MermaidChart from "@/components/MermaidChart";
 import Quiz from "@/components/Quiz";
 import QuizList from "@/components/QuizList";
 import AdPlaceholder from "@/components/AdPlaceholder";
@@ -411,11 +412,16 @@ const BlogPreview = () => {
                           </blockquote>
                         ),
                         code: ({ className, children }) => {
-                          const match = /language-(\w+)/.exec(className || "");
+                          const langMatch = /language-(\w+)/.exec(className || "");
                           const codeString = String(children).replace(/\n$/, "");
                           // 언어가 지정되었거나, 여러 줄이면 코드 블록으로 처리
-                          const isBlock = match || codeString.includes("\n");
-                          const language = match ? match[1] : "text";
+                          const isBlock = langMatch || codeString.includes("\n");
+                          const language = langMatch ? langMatch[1] : "text";
+
+                          // Mermaid 차트 처리
+                          if (language === "mermaid") {
+                            return <MermaidChart chart={codeString} />;
+                          }
 
                           if (isBlock) {
                             return (
