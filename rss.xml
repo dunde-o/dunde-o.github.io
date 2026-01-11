@@ -5,14 +5,15 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 11 Jan 2026 06:31:58 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jan 2026 06:34:42 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Mermaid로 마크다운에서 다이어그램 그리기</title>
       <link>https://www.dunde.kr/blog/2e5ca0f9b5ae805cbccfd59dc9b65756</link>
       <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae805cbccfd59dc9b65756</guid>
       <pubDate>Sun, 11 Jan 2026 05:30:00 GMT</pubDate>
-      <description></description>
+      <description>Mermaid로 마크다운에서 다이어그램 그리기 문서를 작성하다 보면 복잡한 로직이나 시스템 구조를 설명해야 할 때가 있습니다. 이럴 때 텍스트만으로 설명하면 이해하기 어렵고, 이미지 파일을 만들자니 수정이 번거롭습니다. Mermaid는 텍스트 기반으로 다이어그램을 생성하는 JavaScript 라이브러리입니다. 마크다운 코드 블록 안에 간단한 문법으로 작성하면 자동으로 다이어그램이 렌더링됩니다. --
+Mermaid란? Mermaid는 마크다운에서 영감을 받은 텍스트 정의를 사용하여 다이어그램을 생성하는 도구입니다. GitHub, Gi</description>
       <category>개발</category>
       <category>Mermaid</category>
       <category>다이어그램</category>
