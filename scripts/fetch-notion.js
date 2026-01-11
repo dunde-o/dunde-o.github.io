@@ -6,6 +6,7 @@ import { dirname, join } from "path";
 import https from "https";
 import http from "http";
 import crypto from "crypto";
+import sharp from "sharp";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,15 +34,15 @@ function loadExistingPosts() {
   return [];
 }
 
-// 이미지 다운로드 함수
-async function downloadImage(url, filename, targetDir = IMAGE_DIR) {
+// 이미지 다운로드 함수 (버퍼 반환)
+async function downloadImageBuffer(url) {
   return new Promise((resolve, reject) => {
     const protocol = url.startsWith("https") ? https : http;
 
     protocol.get(url, (response) => {
       // 리다이렉트 처리
       if (response.statusCode === 301 || response.statusCode === 302) {
-        downloadImage(response.headers.location, filename, targetDir)
+        downloadImageBuffer(response.headers.location)
           .then(resolve)
           .catch(reject);
         return;
@@ -56,17 +57,22 @@ async function downloadImage(url, filename, targetDir = IMAGE_DIR) {
       response.on("data", (chunk) => chunks.push(chunk));
       response.on("end", () => {
         const buffer = Buffer.concat(chunks);
-        const filepath = join(targetDir, filename);
-        writeFileSync(filepath, buffer);
-        // 상대 경로 반환 (IMAGE_DIR 기준)
-        const relativePath = targetDir === IMAGE_DIR
-          ? `/images/blog/${filename}`
-          : `/images/blog/${targetDir.split('/images/blog/')[1]}/${filename}`;
-        resolve(relativePath);
+        resolve(buffer);
       });
       response.on("error", reject);
     }).on("error", reject);
   });
+}
+
+// 이미지 다운로드 함수 (파일 저장용 - 콘텐츠 이미지용)
+async function downloadImage(url, filename, targetDir = IMAGE_DIR) {
+  const buffer = await downloadImageBuffer(url);
+  const filepath = join(targetDir, filename);
+  writeFileSync(filepath, buffer);
+  const relativePath = targetDir === IMAGE_DIR
+    ? `/images/blog/${filename}`
+    : `/images/blog/${targetDir.split('/images/blog/')[1]}/${filename}`;
+  return relativePath;
 }
 
 // URL에서 파일 확장자 추출
@@ -332,35 +338,63 @@ async function fetchBlogPosts() {
         // 페이지 본문 가져오기 (isUpdated 전달하여 이미지 다운로드 여부 결정)
         const content = await getPageContent(page.id, isUpdated);
 
-        // 커버 이미지 처리
+        // 커버 이미지 처리 (원본 저장 없이 바로 배너/썸네일 생성)
         let coverImage = null;
+        let thumbnailImage = null;
         const coverUrl = page.cover?.external?.url || page.cover?.file?.url;
 
         if (coverUrl) {
           try {
-            // external URL은 그대로 사용
-            if (page.cover?.external?.url) {
-              coverImage = coverUrl;
-            } else {
-              // Notion 내부 URL인 경우
-              const filename = generateFilename(coverUrl, page.id);
-              const localPath = `/images/blog/${filename}`;
-              const fullPath = join(IMAGE_DIR, filename);
+            const filename = generateFilename(coverUrl, page.id);
+            const bannerFilename = filename.replace(/\.[^.]+$/, "-banner.jpg");
+            const thumbFilename = filename.replace(/\.[^.]+$/, "-thumb.jpg");
+            const bannerPath = join(IMAGE_DIR, bannerFilename);
+            const thumbPath = join(IMAGE_DIR, thumbFilename);
+            const bannerLocalPath = `/images/blog/${bannerFilename}`;
+            const thumbLocalPath = `/images/blog/${thumbFilename}`;
 
-              // 업데이트된 포스트이거나 이미지 파일이 없는 경우에만 다운로드
-              if (isUpdated || !existsSync(fullPath)) {
-                coverImage = await downloadImage(coverUrl, filename);
-                console.log(`Downloaded cover image for: ${title}`);
-              } else {
-                // 기존 이미지 경로 유지
-                coverImage = localPath;
-                console.log(`Skipped download (unchanged): ${title}`);
-              }
+            // 업데이트된 포스트이거나 배너 파일이 없는 경우
+            if (isUpdated || !existsSync(bannerPath)) {
+              // 이미지 버퍼 다운로드 (원본 저장 안함)
+              const imageBuffer = await downloadImageBuffer(coverUrl);
+
+              // 배너 이미지 생성 (1200px 최적화)
+              const metadata = await sharp(imageBuffer).metadata();
+              const bannerWidth = metadata.width > 1200 ? 1200 : metadata.width;
+              await sharp(imageBuffer)
+                .resize(bannerWidth, null, { fit: "inside", withoutEnlargement: true })
+                .jpeg({ quality: 85 })
+                .toFile(bannerPath);
+              coverImage = bannerLocalPath;
+
+              // 썸네일 생성 (400x225)
+              await sharp(imageBuffer)
+                .resize(400, 225, { fit: "cover" })
+                .jpeg({ quality: 80 })
+                .toFile(thumbPath);
+              thumbnailImage = thumbLocalPath;
+
+              console.log(`Optimized: ${title}`);
+            } else if (!existsSync(thumbPath)) {
+              // 배너는 있지만 썸네일이 없는 경우 - 배너에서 썸네일 생성
+              coverImage = bannerLocalPath;
+              await sharp(bannerPath)
+                .resize(400, 225, { fit: "cover" })
+                .jpeg({ quality: 80 })
+                .toFile(thumbPath);
+              thumbnailImage = thumbLocalPath;
+              console.log(`Generated thumbnail from banner: ${title}`);
+            } else {
+              // 기존 이미지 경로 유지
+              coverImage = bannerLocalPath;
+              thumbnailImage = thumbLocalPath;
+              console.log(`Skipped (unchanged): ${title}`);
             }
           } catch (error) {
-            console.error(`Failed to download cover image for ${page.id}:`, error.message);
+            console.error(`Failed to process cover image for ${page.id}:`, error.message);
             // 다운로드 실패 시 기존 이미지 유지
             coverImage = existingPost?.coverImage || null;
+            thumbnailImage = existingPost?.thumbnailImage || null;
           }
         }
 
@@ -383,6 +417,7 @@ async function fetchBlogPosts() {
             properties.series?.rich_text?.[0]?.plain_text ||
             null,
           coverImage,
+          thumbnailImage,
           description:
             properties.description?.rich_text?.[0]?.plain_text || null,
           content,

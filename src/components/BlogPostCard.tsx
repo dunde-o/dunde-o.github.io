@@ -76,8 +76,8 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
             </time>
           </div>
 
-          {/* 커버 이미지 영역 */}
-          {post.coverImage && (
+          {/* 커버 이미지 영역 (썸네일 우선 사용) */}
+          {(post.thumbnailImage || post.coverImage) && (
             <div className="flex-shrink-0 hidden sm:flex items-center">
               <div className="relative w-40 h-40">
                 {!imageLoaded && (
@@ -86,7 +86,7 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
                   </div>
                 )}
                 <img
-                  src={post.coverImage}
+                  src={post.thumbnailImage || post.coverImage}
                   alt={post.title}
                   className={`w-40 h-40 object-cover rounded-lg transition-opacity duration-300 ${
                     imageLoaded ? "opacity-100" : "opacity-0"
