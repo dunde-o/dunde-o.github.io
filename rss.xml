@@ -5,8 +5,51 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 11 Jan 2026 06:50:01 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jan 2026 08:58:42 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>모태펀드 완전 정복: 정부 자금이 스타트업에 닿는 과정</title>
+      <link>https://www.dunde.kr/blog/2e5ca0f9b5ae804d821fc832da8729a1</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae804d821fc832da8729a1</guid>
+      <pubDate>Sun, 11 Jan 2026 08:53:00 GMT</pubDate>
+      <description>모태펀드를 모르면 투자 시장을 모르는 것 한국 벤처투자 시장에서 모태펀드를 이해하지 못하면 투자받을 자격이 없다고 해도 과언이 아니다. 왜냐하면 국내 VC들이 운용하는 펀드의 상당 부분이 모태펀드에서 나오기 때문이다. 모태펀드가 뭔지, 어떻게 작동하는지, 어떤 분야에 투자하는지 알아보자. --
+모태펀드란? 모태펀드(Fund of Funds) 는 펀드에 투자하는 펀드다. 정부가 직접 스타트업에 투자하는 게 아니라, VC들이 만든 펀드에 출자하고, 그 VC들이 스타트업에 투자하는 구조다. 핵심 포인트 한국벤처투자(KVIC) 가 모태펀드</description>
+      <category>비즈니스</category>
+      <category>벤처투자</category>
+      <category>모태펀드</category>
+      <category>정부지원</category>
+      <category>한국벤처투자</category>
+      <category>KVIC</category>
+    </item>
+    <item>
+      <title>투자 용어 완전 정복: 스타트업 대표가 알아야 할 필수 개념</title>
+      <link>https://www.dunde.kr/blog/2e5ca0f9b5ae80109a4cc7c9604de01e</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae80109a4cc7c9604de01e</guid>
+      <pubDate>Sun, 11 Jan 2026 08:32:00 GMT</pubDate>
+      <description>투자 미팅 전에 이것만은 알고 가자 투자자를 만나면 처음 듣는 용어들이 쏟아진다. &quot;Pre-money가 얼마예요?&quot;, &quot;FI로 들어갈게요&quot;, &quot;신주로 할까요 구주로 할까요?&quot; 같은 말들. 모르면 대화가 안 되고, 잘못 이해하면 불리한 조건으로 계약할 수도 있다. 이번 글에서는 투자 유치 과정에서 반드시 알아야 할 핵심 용어들을 정리한다. --
+펀드 구조: GP와 LP VC들은 자기 돈으로 투자하지 않는다. 펀드(투자조합) 를 만들어서 여러 곳에서 돈을 모은 뒤 투자한다. | 역할 | 의미 | 누가 하나? |
+|------|-----</description>
+      <category>비즈니스</category>
+      <category>벤처투자</category>
+      <category>스타트업</category>
+      <category>투자용어</category>
+      <category>VC</category>
+      <category>밸류에이션</category>
+    </item>
+    <item>
+      <title>스타트업 투자의 기초: Seed부터 IPO까지</title>
+      <link>https://www.dunde.kr/blog/2e5ca0f9b5ae804eab6af5fb3219e19c</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2e5ca0f9b5ae804eab6af5fb3219e19c</guid>
+      <pubDate>Sun, 11 Jan 2026 07:38:00 GMT</pubDate>
+      <description>투자 단계가 왜 나뉘어 있을까? 창업하면 &quot;시리즈A 투자 받았다&quot;, &quot;유니콘 됐다&quot; 같은 뉴스를 자주 보게 된다. 근데 시리즈A가 뭐고, 그 전에는 뭐가 있는 걸까? 간단히 말하면, 스타트업의 성장 단계에 따라 필요한 돈의 규모가 다르기 때문이다. 아이디어만 있을 때와 매출이 나올 때 필요한 자금이 다르고, 그만큼 투자자가 감수하는 리스크도 다르다. 보통 창업부터 IPO(상장)나 M&amp;A(인수합병)까지 58년 정도 걸린다. --
+전체 흐름 한눈에 보기 각 라운드 사이에 Bridge나 Pre-A 같은 중간 라운드가 끼어들기도 한다. 정</description>
+      <category>비즈니스</category>
+      <category>벤처투자</category>
+      <category>스타트업</category>
+      <category>VC</category>
+      <category>엔젤투자</category>
+      <category>시리즈투자</category>
+    </item>
     <item>
       <title>Mermaid로 마크다운에서 다이어그램 그리기</title>
       <link>https://www.dunde.kr/blog/2e5ca0f9b5ae805cbccfd59dc9b65756</link>
