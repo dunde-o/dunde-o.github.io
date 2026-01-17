@@ -5,8 +5,26 @@
     <link>https://www.dunde.kr</link>
     <description>개발 여정에서 배운 것들과 생각을 기록합니다.</description>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 16 Jan 2026 15:25:44 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 17 Jan 2026 05:02:16 GMT</lastBuildDate>
     <atom:link href="https://www.dunde.kr/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Windows 11 설치 시 Microsoft 계정 없이 로컬 계정으로 설정하기</title>
+      <link>https://www.dunde.kr/blog/2ebca0f9b5ae8001a1d7fef6c3625b53</link>
+      <guid isPermaLink="true">https://www.dunde.kr/blog/2ebca0f9b5ae8001a1d7fef6c3625b53</guid>
+      <pubDate>Sat, 17 Jan 2026 04:59:00 GMT</pubDate>
+      <description>Windows 11 설치 시 Microsoft 계정 없이 로컬 계정으로 설정하기 Windows 11을 새로 설치하면 Microsoft 계정 로그인을 강제하는 화면이 나옵니다. 인터넷에 연결된 상태에서는 이 단계를 건너뛸 수 없게 되어 있는데, 간단한 명령어로 우회하는 방법을 알아봅니다. --
+왜 Microsoft 계정이 강제되는가? Windows 11은 설치 과정(OOBE, Out-Of-Box Experience)에서 인터넷 연결이 감지되면 반드시 Microsoft 계정으로 로그인해야 다음 단계로 넘어갈 수 있습니다. Microso</description>
+      <category>일상 도움</category>
+      <category>Windows 11</category>
+      <category>로컬 계정</category>
+      <category>Microsoft 계정</category>
+      <category>oobe</category>
+      <category>bypassnro</category>
+      <category>netsh</category>
+      <category>Wi-Fi</category>
+      <category>윈도우 설치</category>
+      <category>우회</category>
+    </item>
     <item>
       <title>팁스(TIPS) 가이드: 초기 스타트업을 위한 정부 지원 프로그램</title>
       <link>https://www.dunde.kr/blog/2eaca0f9b5ae800a814ff7a2630b2e40</link>
